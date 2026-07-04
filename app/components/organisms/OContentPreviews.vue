@@ -1,16 +1,8 @@
 <script setup lang="ts">
-interface ContentItem {
-  id: string
-  title: string
-  summary: string
-  category: string
-}
+import { contentArticles } from '~/data/contentArticles'
+import type { ContentArticle } from '~/data/contentArticles'
 
-const items: ContentItem[] = [
-  { id: '1', title: 'The Complete Guide to Freelancing', summary: 'How to land your first client in 30 days using LinkedIn and cold outreach.', category: 'Freelancing' },
-  { id: '2', title: 'Passive Income Blueprint', summary: 'Build a portfolio of revenue streams that generate income around the clock.', category: 'Investing' },
-  { id: '3', title: 'E-Commerce Starter Kit', summary: 'Launch a profitable online store in a weekend with zero inventory.', category: 'E-Commerce' },
-]
+const items: ContentArticle[] = contentArticles
 
 const expandedId = ref<string | null>(null)
 
@@ -32,7 +24,7 @@ function toggle(id: string) {
         {{ $t('content.previewsTitle') }}
       </h2>
 
-      <ul class="space-y-3" role="list">
+      <ul class="space-y-3">
         <li
           v-for="item in items"
           :key="item.id"
@@ -59,8 +51,11 @@ function toggle(id: string) {
             v-show="expandedId === item.id"
             class="px-5 pb-5"
           >
-            <p class="text-on-surface-variant mb-3">{{ item.summary }}</p>
-            <MContentPreview :item="item" />
+            <MContentPreview
+              :title="item.title"
+              :preview="item.summary"
+              :full-content="item.article"
+            />
           </div>
         </li>
       </ul>

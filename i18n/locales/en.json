@@ -8,7 +8,8 @@
     "save": "Save",
     "delete": "Delete",
     "cancel": "Cancel",
-    "select": "Select"
+    "select": "Select",
+    "openInNewTab": "{resource} - opens in new tab"
   },
   "nav": {
     "home": "Home",
@@ -70,7 +71,8 @@
     "tenShares": "10 Shares",
     "earlyAccess": "Early Access",
     "sevenDayStreak": "7-Day Streak",
-    "twentyOneDayStreak": "21-Day Streak"
+    "twentyOneDayStreak": "21-Day Streak",
+    "earnedCount": "{count} earned"
   },
   "notification": {
     "morning": "Good morning! Start your day with new opportunities.",
@@ -78,7 +80,12 @@
     "weekend": "Happy weekend! Catch up on money-making tips.",
     "weekday": "New opportunities await.",
     "welcomeFirst": "Welcome! We're glad you're here.",
-    "activityNow": "just now"
+    "activityNow": "just now",
+    "welcomeBack": "Welcome back, {activity}",
+    "activityHour": "{count} hour ago",
+    "activityHours": "{count} hours ago",
+    "activityDay": "{count} day ago",
+    "activityDays": "{count} days ago"
   },
   "exclusive": {
     "title": "Exclusive Members Area",
@@ -92,7 +99,9 @@
   "checkin": {
     "checkInNow": "Check In Now",
     "days": "days",
-    "alreadyCheckedIn": "You've already checked in today!"
+    "alreadyCheckedIn": "You've already checked in today!",
+    "streakLabel": "{count} day streak",
+    "streakProgress": "Streak progress"
   },
   "calculator": {
     "subtitle": "See how much you could earn",
@@ -114,7 +123,10 @@
     "metric2Label": "Time to First Paycheck",
     "metric2Value": "14 days",
     "metric3Label": "Monthly Active Users",
-    "metric3Value": "10,000+"
+    "metric3Value": "10,000+",
+    "resultItem1": "Built a diversified income portfolio across 3 platforms",
+    "resultItem2": "Achieved financial independence within 12 months",
+    "resultItem3": "Now mentoring 50+ others through the same process"
   },
   "successStory": {
     "title": "From Side Hustle to Full Time",

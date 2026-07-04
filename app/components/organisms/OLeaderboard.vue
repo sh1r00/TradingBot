@@ -130,18 +130,12 @@ onMounted(() => {
             </p>
           </div>
 
-          <!-- External link icon -->
+          <!-- External link icon (rendered by ALink's external prop) -->
           <ALink
             :href="resource.url"
             :aria-label="`${resource.title} - ${t('common.openInNewTab', { resource: resource.title })}`"
             external
-          >
-            <AIcon
-              name="open_in_new"
-              size="sm"
-              decorative
-            />
-          </ALink>
+          />
         </li>
       </ol>
     </div>

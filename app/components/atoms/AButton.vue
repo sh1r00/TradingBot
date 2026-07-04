@@ -14,6 +14,7 @@
     :aria-disabled="disabled || undefined"
     :aria-label="ariaLabel || undefined"
     :aria-busy="loading || undefined"
+    @click="$emit('click', $event)"
   >
     <slot name="icon-left" />
     <slot />

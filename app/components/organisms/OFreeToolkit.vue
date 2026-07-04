@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/stores/auth'
+
+const auth = useAuthStore()
+const toast = useToast()
+const { t } = useI18n()
+
 interface Tool {
   id: string
   title: string
@@ -36,6 +42,10 @@ const expandedTool = ref<string | null>(null)
 function toggleTool(id: string) {
   expandedTool.value = expandedTool.value === id ? null : id
 }
+
+function handleGetAccess(tool: Tool) {
+  toast.success(t('toolkit.access') + ': ' + tool.title + ' unlocked! 🎉')
+}
 </script>
 
 <template>
@@ -60,7 +70,6 @@ function toggleTool(id: string) {
           :key="tool.id"
           class="bg-surface rounded-2xl overflow-hidden"
         >
-          <!-- Tool header (button) -->
           <button
             class="w-full flex items-center gap-4 p-5 text-left hover:bg-surface-variant transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset min-h-[44px]"
             :aria-expanded="expandedTool === tool.id"
@@ -79,27 +88,45 @@ function toggleTool(id: string) {
             </div>
             <AIcon
               :name="expandedTool === tool.id ? 'expand_less' : 'expand_more'"
-              class="text-on-surface-variant flex-shrink-0 transition-transform duration-200 motion-reduce:transition-none"
+              class="text-on-surface-variant flex-shrink-0"
             />
           </button>
 
-          <!-- Tool content -->
           <div
             :id="`tool-content-${tool.id}`"
             v-show="expandedTool === tool.id"
             class="px-5 pb-5"
           >
             <p class="text-on-surface-variant mb-4">{{ tool.description }}</p>
+
+            <!-- Gated: redirect to login if not authenticated -->
+            <NuxtLink
+              v-if="!auth.isAuthenticated"
+              to="/login"
+              :aria-label="`Access ${tool.title}`"
+              class="inline-flex items-center justify-center gap-2 min-h-11 min-w-11 px-6 py-3 rounded-full font-medium text-sm tracking-wide bg-primary text-on-primary hover:bg-primary/90 active:bg-primary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              {{ $t('toolkit.access') }}
+            </NuxtLink>
             <AButton
+              v-else
               variant="filled"
               size="sm"
               :aria-label="`Access ${tool.title}`"
+              @click="handleGetAccess(tool)"
             >
               {{ $t('toolkit.access') }}
             </AButton>
           </div>
         </li>
       </ul>
+
+      <p v-if="!auth.isAuthenticated" class="text-xs text-center mt-6 text-on-secondary-container/60">
+        <NuxtLink to="/login" class="text-primary hover:underline font-medium">
+          Sign in
+        </NuxtLink>
+        to access your free tools
+      </p>
     </div>
   </section>
 </template>

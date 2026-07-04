@@ -22,13 +22,28 @@
         />
         <p class="text-on-surface-variant mb-6">{{ $t('exclusive.locked') }}</p>
         <div class="flex flex-wrap justify-center gap-3">
+          <NuxtLink
+            v-if="!auth.isAuthenticated"
+            to="/login"
+            class="inline-flex items-center justify-center gap-2 min-h-11 min-w-11 px-6 py-3 rounded-full font-medium text-sm tracking-wide bg-primary text-on-primary hover:bg-primary/90 active:bg-primary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            {{ $t('exclusive.unlock') }}
+          </NuxtLink>
           <AButton
+            v-else
             variant="filled"
             @click="handleUnlockAttempt"
           >
             {{ $t('exclusive.unlock') }}
           </AButton>
         </div>
+
+        <p v-if="!auth.isAuthenticated" class="text-xs text-on-surface-variant mt-4">
+          <NuxtLink to="/login" class="text-primary hover:underline">
+            Sign in
+          </NuxtLink>
+          to unlock exclusive content
+        </p>
       </div>
 
       <div v-else>
@@ -79,12 +94,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAchievements } from '~/composables/useAchievements'
-import { useToast } from '~/composables/useToast'
+import { useAuthStore } from '~/stores/auth'
 import AIcon from '~/components/atoms/AIcon.vue'
 import AButton from '~/components/atoms/AButton.vue'
 
-const { unlockedGatedContent, triggerShare } = useAchievements()
-const toast = useToast()
+const { unlockedGatedContent, awardBadge } = useAchievements()
+const auth = useAuthStore()
 
 const isExpanded = ref(false)
 const showingUnlockToast = ref(false)
@@ -96,16 +111,15 @@ function toggleAccess(): void {
 }
 
 function handleUnlockAttempt(): void {
-  // If user has already unlocked, expand the content
+  // Already unlocked — just expand
   if (unlockedGatedContent.value) {
     isExpanded.value = true
     return
   }
 
-  // If not unlocked, prompt user to share
-  toast.info($t('exclusive.shareToUnlock'))
-  
-  // Show temporary toast indicating what's needed
+  // User is authenticated — award early access and unlock
+  awardBadge('early_access')
+  isExpanded.value = true
   showingUnlockToast.value = true
   setTimeout(() => {
     showingUnlockToast.value = false

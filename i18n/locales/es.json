@@ -8,7 +8,8 @@
     "save": "Guardar",
     "delete": "Eliminar",
     "cancel": "Cancelar",
-    "select": "Seleccionar"
+    "select": "Seleccionar",
+    "openInNewTab": "{resource} - abre en nueva pestaña"
   },
   "nav": {
     "home": "Inicio",
@@ -70,7 +71,8 @@
     "tenShares": "10 Comparticiones",
     "earlyAccess": "Acceso Anticipado",
     "sevenDayStreak": "Racha de 7 Días",
-    "twentyOneDayStreak": "Racha de 21 Días"
+    "twentyOneDayStreak": "Racha de 21 Días",
+    "earnedCount": "{count} ganados"
   },
   "notification": {
     "morning": "¡Buenos días! Comienza tu día con nuevas oportunidades.",
@@ -78,7 +80,12 @@
     "weekend": "¡Feliz fin de semana! Ponte al día con consejos para ganar dinero.",
     "weekday": "Nuevas oportunidades te esperan.",
     "welcomeFirst": "¡Bienvenido! Nos alegra que estés aquí.",
-    "activityNow": "ahora mismo"
+    "activityNow": "ahora mismo",
+    "welcomeBack": "Bienvenido de nuevo, {activity}",
+    "activityHour": "hace {count} hora",
+    "activityHours": "hace {count} horas",
+    "activityDay": "hace {count} día",
+    "activityDays": "hace {count} días"
   },
   "exclusive": {
     "title": "Área de Miembros Exclusivos",

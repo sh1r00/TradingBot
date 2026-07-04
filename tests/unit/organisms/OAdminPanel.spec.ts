@@ -16,6 +16,14 @@ vi.mock('~/composables/useToast', () => ({
   }),
 }))
 
+vi.mock('~/components/atoms/AImage.vue', () => ({
+  default: {
+    name: 'AImage',
+    props: ['src', 'alt', 'decorative', 'lazy', 'width', 'height', 'error', 'fallbackClasses'],
+    template: '<div class="mock-image" />',
+  },
+}))
+
 const i18n = createI18n({
   legacy: false,
   locale: 'en',

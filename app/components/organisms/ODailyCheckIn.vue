@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useEngagementStore } from '~/stores/engagement'
+import { useAuthStore } from '~/stores/auth'
+import { useAchievements } from '~/composables/useAchievements'
 
 const engagement = useEngagementStore()
+const auth = useAuthStore()
+const { checkAchievements } = useAchievements()
 const toast = useToast()
 const { t } = useI18n()
 
@@ -17,6 +21,7 @@ const hasCheckedInToday = computed(() => {
 function checkIn() {
   engagement.markVisit()
   engagement.incrementDailyCheckIn()
+  checkAchievements()
   toast.success(t('viral.dailyCheckIn') + ' ✓')
 }
 </script>
@@ -35,7 +40,6 @@ function checkIn() {
       </h2>
       <p class="text-on-surface-variant mb-6">{{ $t('checkin.streakLabel', { count: streak }) }}</p>
 
-      <!-- Progress bar -->
       <div class="mb-6">
         <div
           role="progressbar"
@@ -55,8 +59,16 @@ function checkIn() {
         </p>
       </div>
 
-      <!-- Check-in button -->
+      <!-- Gated button: redirects to login if not authenticated -->
+      <NuxtLink
+        v-if="!auth.isAuthenticated"
+        to="/login"
+        class="inline-flex items-center justify-center gap-2 min-h-11 min-w-11 px-6 py-3 rounded-full font-medium text-sm tracking-wide bg-primary text-on-primary hover:bg-primary/90 active:bg-primary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      >
+        {{ $t('checkin.checkInNow') }}
+      </NuxtLink>
       <AButton
+        v-else
         variant="filled"
         size="lg"
         :disabled="hasCheckedInToday"
@@ -64,6 +76,13 @@ function checkIn() {
       >
         {{ hasCheckedInToday ? $t('checkin.alreadyCheckedIn') : $t('checkin.checkInNow') }}
       </AButton>
+
+      <p v-if="!auth.isAuthenticated" class="text-xs text-on-surface-variant mt-3">
+        <NuxtLink to="/login" class="text-primary hover:underline">
+          Sign in
+        </NuxtLink>
+        to track your streak
+      </p>
     </div>
   </section>
 </template>

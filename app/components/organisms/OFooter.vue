@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-const { locale, locales, t } = useI18n()
+const { locale, locales, setLocale, t } = useI18n()
 const localePath = useLocalePath()
 
 const currentYear = new Date().getFullYear()
@@ -15,15 +15,12 @@ const localeOptions = computed(() =>
   })
 )
 
-// Get current locale name
-const currentLocaleName = computed(() => {
-  const current = locales.value.find((l) => (typeof l === 'string' ? l : l.code) === locale.value)
-  return current ? (typeof current === 'string' ? current : current.name) : ''
-})
+// Current locale code (not name) for the switcher
+const currentLocaleCode = computed(() => locale.value)
 
 // Handle locale change
 async function handleLocaleChange(code: string) {
-  await useLocale(code as 'en' | 'es' | 'am')
+  await setLocale(code)
 }
 </script>
 
@@ -100,7 +97,7 @@ async function handleLocaleChange(code: string) {
               {{ t('footer.language') }}:
             </span>
             <MLanguageSwitcher
-              :current-locale="currentLocaleName"
+              :current-locale="currentLocaleCode"
               :locales="localeOptions"
               @select="handleLocaleChange"
             />
@@ -110,6 +107,16 @@ async function handleLocaleChange(code: string) {
           <p class="text-sm text-on-surface-variant text-center md:text-right">
             &copy; {{ currentYear }} {{ t('common.appName') }}
           </p>
+
+          <!-- Admin cog (discreet, no label) -->
+          <NuxtLink
+            :to="localePath('/admin')"
+            :aria-label="$t('nav.admin')"
+            class="p-1.5 rounded-full hover:bg-surface-variant transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            title="Admin"
+          >
+            <AIcon name="settings" size="sm" class="text-on-surface-variant" />
+          </NuxtLink>
         </div>
       </div>
     </div>

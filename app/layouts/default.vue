@@ -1,52 +1,57 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { onMounted, nextTick } from 'vue'
+import { onMounted, onUnmounted, nextTick, computed } from 'vue'
 import { useDarkModeStore } from '~/stores/darkMode'
 import { usePwaInstallStore } from '~/stores/pwaInstall'
+import { useAuthStore } from '~/stores/auth'
 
 const route = useRoute()
 const darkModeStore = useDarkModeStore()
 const pwaInstallStore = usePwaInstallStore()
+const authStore = useAuthStore()
 
-// Initialize stores on mount
+// Reactively track dark mode for template class binding
+const isDark = computed(() => darkModeStore.isDark)
+
+// Apply/remove dark class on <html> element directly (bypasses Vue SSR hydration issues)
+watch(isDark, (val) => {
+  if (import.meta.client) {
+    document.documentElement.classList.toggle('dark', val)
+  }
+})
+
+// Initialize stores (client-side only — localStorage not available on server)
 onMounted(() => {
   darkModeStore.initialize()
   pwaInstallStore.initialize()
+  authStore.initialize()
+})
 
-  // Move focus to main content within 300ms of route change
-  const cleanupRouteWatch = route.meta?.skipFocusManagement !== true
-    ? watch(
-        () => route.fullPath,
-        () => {
-          nextTick(() => {
-            const mainContent = document.getElementById('main-content')
-            if (mainContent) {
-              // Use setTimeout to ensure it's within 300ms window
-              setTimeout(() => {
-                mainContent.focus()
-              }, 100)
-            }
-          })
-        },
-        { immediate: true }
-      )
-    : null
+// Focus management on route change
+const cleanupRouteWatch = watch(
+  () => route.fullPath,
+  () => {
+    nextTick(() => {
+      const mainContent = document.getElementById('main-content')
+      if (mainContent) {
+        setTimeout(() => mainContent.focus(), 100)
+      }
+    })
+  },
+  { immediate: true }
+)
 
-  // Cleanup on unmount
-  onUnmounted(() => {
-    if (cleanupRouteWatch) {
-      cleanupRouteWatch()
-    }
-  })
+onUnmounted(() => {
+  cleanupRouteWatch()
 })
 </script>
 
 <template>
   <div
     class="min-h-screen flex flex-col bg-surface text-on-surface font-sans"
-    :class="{ 'dark': darkModeStore.isDark }"
+    :class="{ dark: isDark }"
   >
-    <!-- Skip-to-content link (visually hidden until focused) -->
+    <!-- Skip-to-content link -->
     <a
       href="#main-content"
       class="fixed top-4 left-4 z-50 px-4 py-2 bg-primary text-on-primary rounded-lg shadow-md transform -translate-y-16 focus:translate-y-0 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
@@ -54,20 +59,7 @@ onMounted(() => {
       Skip to main content
     </a>
 
-    <!-- Semantic landmarks -->
-    <header
-      class="bg-primary text-on-primary"
-      aria-label="Site header"
-    >
-      <!-- Navbar would be placed here via ONavbar component -->
-    </header>
-
-    <nav
-      class="bg-primary text-on-primary"
-      aria-label="Primary navigation"
-    >
-      <!-- Navigation content would be placed here -->
-    </nav>
+    <ONavbar />
 
     <main
       id="main-content"
@@ -78,17 +70,10 @@ onMounted(() => {
       <slot />
     </main>
 
-    <footer
-      class="bg-surface-variant text-on-surface-variant"
-      aria-label="Site footer"
-    >
-      <!-- Footer content would be placed here -->
-    </footer>
+    <OFooter />
 
-    <!-- Toast Container (fixed bottom-center) -->
     <OToastContainer />
 
-    <!-- PWA Install Prompt -->
     <ClientOnly>
       <OInstallPrompt />
     </ClientOnly>
@@ -96,13 +81,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Focus-visible indicators for accessibility */
 :focus-visible {
   outline: 2px solid;
   outline-offset: 2px;
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

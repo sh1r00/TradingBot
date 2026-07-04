@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { useDarkModeStore } from '~/stores/darkMode'
+// Load Material Icons font and base SEO
+const i18nHead = useLocaleHead({
+  addSeoAttributes: true,
+})
 
-const darkMode = useDarkModeStore()
-
-// Use useLocaleHead for automatic <html lang> and hreflang
-useLocaleHead({
-  link: (links) => {
-    // Add reduced motion preference based on dark mode
-    return links
-  },
+useHead({
+  link: [
+    ...(i18nHead.link || []),
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },
+  ],
+  htmlAttrs: i18nHead.htmlAttrs,
 })
 
 // Apply reduced motion based on user preference
@@ -33,14 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="motion-safe:transition-colors motion-safe:duration-300">
-    <ClientOnly v-if="darkMode.isDarkMode">
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </ClientOnly>
-    <NuxtLayout v-else>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

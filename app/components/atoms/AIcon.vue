@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 
 export interface AIconProps {
   name?: string
@@ -37,7 +37,8 @@ const props = withDefaults(defineProps<AIconProps>(), {
   decorative: true,
 })
 
-const hasContent = computed(() => !!props.name || !!Object.keys($slots).length)
+const slots = useSlots()
+const hasContent = computed(() => !!props.name || !!Object.keys(slots).length)
 
 const sizeClasses = computed(() => {
   return {

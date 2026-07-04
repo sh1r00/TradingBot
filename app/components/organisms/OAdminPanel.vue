@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useResourcesStore, type ResourceLink } from '~/stores/resources'
 import { useFormValidation, type ValidationRule, type FieldConfig } from '~/composables/useFormValidation'
 import { useToast } from '~/composables/useToast'
@@ -285,14 +285,23 @@ function handleDeleteLink(): void {
   }
 }
 
-// Prepare edit form
+// Prepare edit form — fill with existing link data before opening
 function openEditLink(link: ResourceLink): void {
   selectedLinkId.value = link.id
+  // Set field values directly (skip resetForm to avoid clearing)
   createEditFields.title.value.value = link.title
   createEditFields.description.value.value = link.description
   createEditFields.category.value.value = link.category
   createEditFields.url.value.value = link.url
-  createEditFields.thumbnailFile.value.value = null // Reset file field
+  createEditFields.thumbnailFile.value.value = null
+  // Mark all fields as valid since they come from existing data
+  for (const field of Object.values(createEditFields)) {
+    if ('status' in field) {
+      field.status = 'valid'
+      field.error = null
+      field.touched = true
+    }
+  }
   isEditModalOpen.value = true
 }
 
@@ -834,7 +843,7 @@ function getThumbnailUrl(link: ResourceLink): string {
             :loading="false"
             :disabled="!isCreateEditFormValid"
           >
-            {{ isCreateModalOpen ? $t('common.save') : $t('common.save') }}
+            {{ isCreateModalOpen ? $t('admin.create') : $t('admin.edit') }}
           </AButton>
         </div>
       </form>

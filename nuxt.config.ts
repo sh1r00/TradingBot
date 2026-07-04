@@ -6,6 +6,14 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
+  components: {
+    dirs: [
+      { path: '~/components/atoms', pathPrefix: false },
+      { path: '~/components/molecules', pathPrefix: false },
+      { path: '~/components/organisms', pathPrefix: false },
+    ],
+  },
+
   modules: [
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
@@ -38,16 +46,19 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en',
+        iso: 'en-US',
         name: 'English',
         file: 'en.json',
       },
       {
         code: 'es',
+        iso: 'es-ES',
         name: 'Español',
         file: 'es.json',
       },
       {
         code: 'am',
+        iso: 'am-ET',
         name: 'አማርኛ',
         file: 'am.json',
       },

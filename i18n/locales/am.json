@@ -1,187 +1,196 @@
 {
   "common": {
-    "appName": "[AM] Money Conversion SPA",
-    "loading": "[AM] Cargando...",
-    "error": "[AM] Ocurrió un error",
-    "retry": "[AM] Reintentar",
-    "close": "[AM] Cerrar",
-    "save": "[AM] Guardar",
-    "delete": "[AM] Eliminar",
-    "cancel": "[AM] Cancelar",
-    "select": "[AM] Seleccionar"
+    "appName": "Money Conversion SPA",
+    "loading": "በመጫን ላይ...",
+    "error": "ስህተት ተከስቷል",
+    "retry": "እንደገና ሞክር",
+    "close": "ዝጋ",
+    "save": "አስቀምጥ",
+    "delete": "ሰርዝ",
+    "cancel": "ሰርዝ",
+    "select": "ምረጥ",
+    "openInNewTab": "{resource} - በአዲስ ትር ውስጥ ይከፈታል"
   },
   "nav": {
-    "home": "[AM] Inicio",
-    "resources": "[AM] Recursos",
-    "admin": "[AM] Administración",
-    "darkMode": "[AM] Modo oscuro",
-    "lightMode": "[AM] Modo claro",
-    "openMenu": "[AM] Abrir menú",
-    "closeMenu": "[AM] Cerrar menú"
+    "home": "መነሻ",
+    "resources": "መረጃዎች",
+    "admin": "አስተዳደር",
+    "darkMode": "ጨለማ ሁነታ",
+    "lightMode": "ብርሃን ሁነታ",
+    "openMenu": "ምናሌ ክፈት",
+    "closeMenu": "ምናሌ ዝጋ"
   },
   "hero": {
-    "title": "[AM] Tu Camino Hacia la Libertad Financiera",
-    "subtitle": "[AM] Recursos y herramientas seleccionados para ganar dinero.",
-    "cta": "[AM] Explorar Recursos",
-    "ctaSecondary": "[AM] Calcular tus Ingresos",
-    "socialProof": "[AM] Únete a miles que ya están aumentando sus ingresos"
+    "title": "ወደ የፋይናንስ ነፃነት መንገድዎ",
+    "subtitle": "የተመረጡ እና የተረጋገጡ ገንዘብ የማግኛ መረጃዎች እና መሳሪያዎች።",
+    "cta": "መረጃዎችን ያስሱ",
+    "ctaSecondary": "ገቢዎን ያስሉ",
+    "socialProof": "ገቢያቸውን እያሳደጉ ካሉ በሺዎች ጋር ይቀላቀሉ"
   },
   "viral": {
-    "leaderboardTitle": "[AM] Recursos Más Compartidos",
-    "achievementEarned": "[AM] ¡Logro Desbloqueado!",
-    "activityFeed": "[AM] Actividad en Vivo",
-    "dailyCheckIn": "[AM] Registro Diario",
-    "incomeCalculator": "[AM] Calculadora de Ingresos",
-    "shareSuccess": "[AM] ¡Gracias por compartir!",
-    "copySuccess": "[AM] ¡Copiado al portapapeles!"
+    "leaderboardTitle": "በጣም የተጋሩ መረጃዎች",
+    "achievementEarned": "ስኬት ተከፍቷል!",
+    "activityFeed": "የቀጥታ እንቅስቃሴ",
+    "dailyCheckIn": "ዕለታዊ ምዝገባ",
+    "incomeCalculator": "የገቢ ማስያ",
+    "shareSuccess": "ስላጋሩ እናመሰግናለን!",
+    "copySuccess": "ወደ ክሊፕቦርድ ተቀድቷል!"
   },
   "admin": {
-    "title": "[AM] Panel de Administración",
-    "allLinks": "[AM] Todos los enlaces",
-    "create": "[AM] Crear",
-    "createLink": "[AM] Crear Enlace",
-    "editLink": "[AM] Editar Enlace",
-    "deleteLink": "[AM] Eliminar Enlace",
-    "confirmDelete": "[AM] ¿Estás seguro de eliminar este enlace?",
-    "deleteWarning": "[AM] Esta acción no se puede deshacer.",
-    "emptyLinks": "[AM] No hay enlaces aún. Crea el primero.",
-    "noLinks": "[AM] No hay enlaces.",
-    "titlePlaceholder": "[AM] Título",
-    "descriptionPlaceholder": "[AM] Descripción",
-    "categoryPlaceholder": "[AM] Categoría",
-    "urlPlaceholder": "[AM] URL",
-    "uploadImage": "[AM] Subir imagen",
-    "edit": "[AM] Editar",
-    "delete": "[AM] Eliminar"
+    "title": "የአስተዳደር ፓነል",
+    "allLinks": "ሁሉም አገናኞች",
+    "create": "ፍጠር",
+    "createLink": "አገናኝ ፍጠር",
+    "editLink": "አገናኝ አስተካክል",
+    "deleteLink": "አገናኝ ሰርዝ",
+    "confirmDelete": "ይህን አገናኝ መሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?",
+    "deleteWarning": "ይህ እርምጃ መመለስ አይቻልም።",
+    "emptyLinks": "እስካሁን ምንም አገናኝ የለም። የመጀመሪያውን ይፍጠሩ።",
+    "noLinks": "እስካሁን ምንም አገናኝ የለም።",
+    "titlePlaceholder": "ርዕስ",
+    "descriptionPlaceholder": "መግለጫ",
+    "categoryPlaceholder": "ምድብ",
+    "urlPlaceholder": "URL",
+    "uploadImage": "ምስል ጫን",
+    "edit": "አስተካክል",
+    "delete": "ሰርዝ"
   },
   "resources": {
-    "title": "[AM] Recursos",
-    "error": "[AM] Error al cargar recursos",
-    "noResourcesTitle": "[AM] No Hay Recursos Disponibles",
-    "noResourcesDescription": "[AM] Vuelve pronto para ver recursos seleccionados.",
+    "title": "መረጃዎች",
+    "error": "መረጃዎችን መጫን አልተሳካም",
+    "noResourcesTitle": "ምንም መረጃ አይገኝም",
+    "noResourcesDescription": "ለተመረጡ ገንዘብ ማግኛ መረጃዎች በቅርቡ ይመለሱ።",
     "categories": {
-      "general": "[AM] General"
+      "general": "አጠቃላይ"
     }
   },
   "badge": {
-    "gatedTitle": "[AM] Tus Logros",
-    "firstShare": "[AM] Primera Compartición",
-    "fiveShares": "[AM] 5 Comparticiones",
-    "tenShares": "[AM] 10 Comparticiones",
-    "earlyAccess": "[AM] Acceso Anticipado",
-    "sevenDayStreak": "[AM] Racha de 7 Días",
-    "twentyOneDayStreak": "[AM] Racha de 21 Días"
+    "gatedTitle": "የእርስዎ ስኬቶች",
+    "firstShare": "የመጀመሪያ መጋራት",
+    "fiveShares": "5 መጋራቶች",
+    "tenShares": "10 መጋራቶች",
+    "earlyAccess": "ቀድሞ መድረሻ",
+    "sevenDayStreak": "የ7 ቀን ተከታታይነት",
+    "twentyOneDayStreak": "የ21 ቀን ተከታታይነት",
+    "earnedCount": "{count} ተገኝቷል"
   },
   "notification": {
-    "morning": "[AM] ¡Buenos días! Comienza tu día con nuevas oportunidades.",
-    "evening": "[AM] ¡Buenas tardes! Revisa los mejores recursos de hoy.",
-    "weekend": "[AM] ¡Feliz fin de semana! Ponte al día con consejos para ganar dinero.",
-    "weekday": "[AM] Nuevas oportunidades te esperan.",
-    "welcomeFirst": "[AM] ¡Bienvenido! Nos alegra que estés aquí.",
-    "activityNow": "[AM] ahora mismo"
+    "morning": "እንደምን አደሩ! ቀንዎን በአዳዲስ እድሎች ይጀምሩ።",
+    "evening": "እንደምን አመሹ! የዛሬዎቹን ምርጥ መረጃዎች ይገምግሙ።",
+    "weekend": "መልካም ቅዳሜና እሁድ! የገንዘብ ማግኛ ምክሮችን ይከታተሉ።",
+    "weekday": "አዳዲስ እድሎች ይጠብቁዎታል።",
+    "welcomeFirst": "እንኳን ደህና መጡ! እዚህ በመገኘትዎ ደስተኞች ነን።",
+    "activityNow": "ልክ አሁን",
+    "welcomeBack": "እንኳን ደህና ተመለሱ፣ {activity}",
+    "activityHour": "ከ{count} ሰዓት በፊት",
+    "activityHours": "ከ{count} ሰዓታት በፊት",
+    "activityDay": "ከ{count} ቀን በፊት",
+    "activityDays": "ከ{count} ቀናት በፊት"
   },
   "exclusive": {
-    "title": "[AM] Área de Miembros Exclusivos",
-    "locked": "[AM] Completa una racha de registro diario para desbloquear contenido exclusivo.",
-    "unlock": "[AM] Comienza tu Racha",
-    "unlocked": "[AM] Contenido Exclusivo Desbloqueado",
-    "content": "[AM] Bienvenido al área de miembros exclusivos.",
-    "shareToUnlock": "[AM] Comparte con amigos para desbloquear contenido premium",
-    "unlockedMessage": "[AM] ¡Has desbloqueado contenido exclusivo!"
+    "title": "ብቸኛ የአባላት አካባቢ",
+    "locked": "ልዩ ይዘትን ለመክፈት ዕለታዊ የምዝገባ ተከታታይነት ያጠናቅቁ።",
+    "unlock": "ተከታታይነትዎን ይጀምሩ",
+    "unlocked": "ልዩ ይዘት ተከፍቷል",
+    "content": "ወደ ብቸኛ የአባላት አካባቢ እንኳን ደህና መጡ።",
+    "shareToUnlock": "ፕሪሚየም ይዘትን ለመክፈት ለጓደኞችዎ ያጋሩ",
+    "unlockedMessage": "ልዩ ይዘትን ከፍተዋል!"
   },
   "checkin": {
-    "checkInNow": "[AM] Registrarse Ahora",
-    "days": "[AM] días",
-    "alreadyCheckedIn": "[AM] ¡Ya te has registrado hoy!"
+    "checkInNow": "አሁን ይመዝገቡ",
+    "days": "ቀናት",
+    "alreadyCheckedIn": "ዛሬ አስቀድመው ተመዝግበዋል!",
+    "streakLabel": "የ{count} ቀን ተከታታይነት",
+    "streakProgress": "የተከታታይነት እድገት"
   },
   "calculator": {
-    "subtitle": "[AM] Descubre cuánto podrías ganar",
-    "hourlyRate": "[AM] Tarifa por Hora",
-    "hoursPerWeek": "[AM] Horas por Semana",
-    "perYear": "[AM] por año",
-    "month": "[AM] mes"
+    "subtitle": "ምን ያህል ማግኘት እንደሚችሉ ይመልከቱ",
+    "hourlyRate": "የሰዓት ክፍያ",
+    "hoursPerWeek": "ሳምንታዊ ሰዓታት",
+    "perYear": "በዓመት",
+    "month": "ወር"
   },
   "caseStudy": {
-    "title": "[AM] Historias de Éxito",
-    "subtitle": "[AM] Resultados reales de personas reales",
-    "challenge": "[AM] El Desafío",
-    "challengeText": "[AM] Antes de descubrir estos recursos, nuestros usuarios luchaban por encontrar fuentes de ingresos confiables.",
-    "solution": "[AM] La Solución",
-    "solutionText": "[AM] Usando nuestras herramientas y estrategias, transformaron su situación financiera.",
-    "results": "[AM] Los Resultados",
-    "metric1Label": "[AM] Aumento de Ingresos",
-    "metric1Value": "[AM] +340%",
-    "metric2Label": "[AM] Tiempo hasta el Primer Pago",
-    "metric2Value": "[AM] 14 días",
-    "metric3Label": "[AM] Usuarios Activos Mensuales",
-    "metric3Value": "[AM] 10,000+"
+    "title": "የስኬት ታሪኮች",
+    "subtitle": "ከእውነተኛ ሰዎች እውነተኛ ውጤቶች",
+    "challenge": "ፈተናው",
+    "challengeText": "እነዚህን መረጃዎች ከማግኘታቸው በፊት፣ ተጠቃሚዎቻችን አስተማማኝ የገቢ ምንጮች ለማግኘት ይቸገሩ ነበር።",
+    "solution": "መፍትሄው",
+    "solutionText": "የተመረጡ መሳሪያዎቻችንን እና ስልቶቻችንን በመጠቀም የፋይናንስ ሁኔታቸውን ቀይረዋል።",
+    "results": "ውጤቶቹ",
+    "metric1Label": "የገቢ ጭማሪ",
+    "metric1Value": "+340%",
+    "metric2Label": "እስከ መጀመሪያ ክፍያ ያለው ጊዜ",
+    "metric2Value": "14 ቀናት",
+    "metric3Label": "ወርሃዊ ንቁ ተጠቃሚዎች",
+    "metric3Value": "10,000+"
   },
   "successStory": {
-    "title": "[AM] De Ingreso Extra a Tiempo Completo",
-    "before": "[AM] Antes",
-    "beforeItem1": "[AM] Trabajando 9-5 sin ingresos extra",
-    "beforeItem2": "[AM] Sin conocimiento de oportunidades en línea",
-    "beforeItem3": "[AM] Estresado por las finanzas",
-    "after": "[AM] Después",
-    "afterItem1": "[AM] Ganando $5,000/mes en línea",
-    "afterItem2": "[AM] Múltiples fuentes de ingresos",
-    "afterItem3": "[AM] Libertad y flexibilidad financiera",
-    "shareCta": "[AM] Compartir Esta Historia"
+    "title": "ከትርፍ ሥራ ወደ ሙሉ ጊዜ",
+    "before": "ከዚህ በፊት",
+    "beforeItem1": "ከ9-5 እየሰሩ ያለ ተጨማሪ ገቢ",
+    "beforeItem2": "ስለ ኦንላይን እድሎች ምንም እውቀት የለም",
+    "beforeItem3": "ስለ ፋይናንስ የተጨነቁ",
+    "after": "ከዚህ በኋላ",
+    "afterItem1": "በወር $5,000 በኦንላይን እያገኙ",
+    "afterItem2": "በርካታ የገቢ ምንጮችን ገንብተዋል",
+    "afterItem3": "የፋይናንስ ነፃነት እና ተለዋዋጭነት",
+    "shareCta": "ይህን ታሪክ ያጋሩ"
   },
   "founder": {
-    "title": "[AM] Nuestra Historia",
-    "name": "[AM] Nombre del Fundador",
-    "quote": "[AM] Construí esta plataforma porque creo que todos merecen acceso a oportunidades legítimas de ganar dinero.",
-    "story1": "[AM] Después de años de prueba y error en el espacio de ingresos en línea, descubrí lo que realmente funciona.",
-    "story2": "[AM] Esta plataforma selecciona solo los mejores recursos probados para que no pierdas tiempo.",
-    "imageAlt": "[AM] Retrato del fundador"
+    "title": "የእኛ ታሪክ",
+    "name": "የመስራች ስም",
+    "quote": "ይህን መድረክ የገነባሁት ሁሉም ሰው ህጋዊ የገንዘብ ማግኛ እድሎች ማግኘት አለበት ብዬ ስለማምን ነው።",
+    "story1": "በኦንላይን ገቢ መስክ ለዓመታት ከሞከርኩ እና ከተሳሳትኩ በኋላ፣ በትክክል የሚሰራውን አገኘሁ።",
+    "story2": "ይህ መድረክ ምርጥ እና የተረጋገጡ መረጃዎችን ብቻ ይመርጣል ስለዚህ ጊዜዎን በማይጠቅሙ ነገሮች ላይ አያባክኑም።",
+    "imageAlt": "የመስራች ፎቶ"
   },
   "painPoints": {
-    "title": "[AM] Deja de Perder Tiempo. Empieza a Ganar.",
-    "before": "[AM] Sin nuestros recursos",
-    "after": "[AM] Con nuestros recursos"
+    "title": "ጊዜ ማባከን ያቁሙ። ማግኘት ይጀምሩ።",
+    "before": "ያለ የእኛ መረጃዎች",
+    "after": "በእኛ መረጃዎች"
   },
   "toolkit": {
-    "title": "[AM] Kit de Herramientas Gratuito",
-    "subtitle": "[AM] Todo lo que necesitas para empezar a ganar dinero en línea hoy",
-    "access": "[AM] Obtener Acceso Gratuito"
+    "title": "ነፃ የገንዘብ ማግኛ መሳሪያዎች",
+    "subtitle": "ዛሬ በኦንላይን ገንዘብ ማግኘት ለመጀመር የሚያስፈልግዎ ሁሉ",
+    "access": "ነፃ መድረሻ ያግኙ"
   },
   "share": {
-    "title": "[AM] Compartir con Amigos",
-    "subtitle": "[AM] Ayuda a otros a descubrir estos recursos",
-    "copyLink": "[AM] Copiar Enlace",
-    "twitter": "[AM] Compartir en Twitter",
-    "linkedin": "[AM] Compartir en LinkedIn"
+    "title": "ለጓደኞች ያጋሩ",
+    "subtitle": "ሌሎች እነዚህን መረጃዎች እንዲያገኙ ያግዙ",
+    "copyLink": "አገናኝ ቅዳ",
+    "twitter": "በTwitter አጋራ",
+    "linkedin": "በLinkedIn አጋራ"
   },
   "content": {
-    "previewsTitle": "[AM] Lo Que Obtendrás"
+    "previewsTitle": "የሚያገኙት"
   },
   "pwa": {
-    "installButton": "[AM] Instalar App",
-    "installPrompt": "[AM] Instala esta app para acceso rápido"
+    "installButton": "መተግበሪያ ጫን",
+    "installPrompt": "ለፈጣን መድረሻ ይህን መተግበሪያ ይጫኑ"
   },
   "footer": {
-    "tagline": "[AM] Ayudándote a construir libertad financiera",
-    "navigation": "[AM] Navegación",
-    "language": "[AM] Idioma",
-    "contact": "[AM] Contacto",
-    "privacy": "[AM] Política de Privacidad",
-    "terms": "[AM] Términos de Servicio"
+    "tagline": "የፋይናንስ ነፃነት እንዲገነቡ እንረዳዎታለን",
+    "navigation": "ዳሰሳ",
+    "language": "ቋንቋ",
+    "contact": "አድራሻ",
+    "privacy": "የግላዊነት ፖሊሲ",
+    "terms": "የአገልግሎት ውሎች"
   },
   "accessibility": {
-    "loading": "[AM] Cargando...",
-    "siteFooter": "[AM] Pie de página"
+    "loading": "በመጫን ላይ...",
+    "siteFooter": "የገፅ ግርጌ"
   },
   "validation": {
-    "fileTooLarge": "[AM] El archivo debe ser menor de 2MB"
+    "fileTooLarge": "ፋይል ከ2MB በታች መሆን አለበት"
   },
   "home": {
-    "title": "[AM] Money Conversion SPA"
+    "title": "Money Conversion SPA"
   },
-  "primaryCta": "[AM] Comenzar",
-  "secondaryCta": "[AM] Más Información",
-  "cancel": "[AM] Cancelar",
-  "confirm": "[AM] Confirmar",
-  "remove": "[AM] Eliminar",
-  "navigate": "[AM] Navegar"
+  "primaryCta": "ይጀምሩ",
+  "secondaryCta": "ተጨማሪ ይወቁ",
+  "cancel": "ሰርዝ",
+  "confirm": "አረጋግጥ",
+  "remove": "አስወግድ",
+  "navigate": "ዳስስ"
 }

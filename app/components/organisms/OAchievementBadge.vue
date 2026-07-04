@@ -105,6 +105,7 @@
         <AProgressBar
           :value="earnedBadges.length"
           :max="totalBadges"
+          aria-label="Achievement progress"
           class="w-48 mx-auto mt-2 h-3"
         />
       </div>

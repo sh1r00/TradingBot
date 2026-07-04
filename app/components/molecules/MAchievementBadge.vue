@@ -8,11 +8,7 @@
     ]"
     :aria-label="`Achievement: ${title}${earned ? ' - earned' : ' - locked'}`"
   >
-    <AIcon :size="'sm'" :decorative="true">
-      <slot name="icon">
-        {{ icon }}
-      </slot>
-    </AIcon>
+    <AIcon :name="icon" :size="'sm'" :decorative="true" />
 
     <ABadge :variant="earned ? 'primary' : 'surface'">
       {{ title }}

@@ -1,5 +1,15 @@
 <script setup lang="ts">
-// Static content component
+function scrollToShare() {
+  document.getElementById('share-section')?.scrollIntoView({ behavior: 'smooth' })
+}
+
+onMounted(() => {
+  // Find the share button and attach an onclick handler
+  const btn = document.querySelector('#share-btn-ss, [data-share="stories"]')
+  if (btn) {
+    btn.addEventListener('click', scrollToShare)
+  }
+})
 </script>
 
 <template>
@@ -47,7 +57,13 @@
         <!-- Share CTA -->
         <div class="text-center">
           <p class="text-on-surface-variant mb-4">{{ $t('successStory.shareCta') }}</p>
-          <AButton variant="filled">{{ $t('share.title') }}</AButton>
+          <button
+            id="share-btn-ss"
+            type="button"
+            class="inline-flex items-center justify-center gap-2 min-h-11 min-w-11 px-6 py-3 rounded-full font-medium text-sm tracking-wide bg-primary text-on-primary hover:bg-primary/90 active:bg-primary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            {{ $t('share.title') }}
+          </button>
         </div>
       </article>
     </div>

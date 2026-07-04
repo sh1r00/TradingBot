@@ -23,6 +23,15 @@ vi.mock('~/composables/useToast', () => ({
   }),
 }))
 
+// Mock auth store
+vi.mock('~/stores/auth', () => ({
+  useAuthStore: () => ({
+    isAuthenticated: false,
+    currentUser: null,
+    initialize: vi.fn(),
+  }),
+}))
+
 // Mock components
 vi.mock('~/components/atoms/AIcon.vue', () => ({
   default: {
@@ -78,8 +87,9 @@ describe('OExclusiveAccess', () => {
       global: { plugins: [i18n] },
     })
     expect(wrapper.text()).toContain('Complete a daily check-in streak')
-    expect(wrapper.find('.mock-button').exists()).toBe(true)
-    expect(wrapper.find('.mock-button').text()).toBe('Start Your Streak')
+    // When not authenticated, renders a NuxtLink (not AButton)
+    expect(wrapper.text()).toContain('Start Your Streak')
+    expect(wrapper.text()).toContain('Sign in')
   })
 
   it('shows unlocked state when content is unlocked', () => {
