@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You are offline - Money Conversion SPA</title>
+  <style>
+    :root {
+      --md-primary: #6750A4;
+      --md-on-primary: #FFFFFF;
+      --md-surface: #FFFBFE;
+      --md-on-surface: #1C1B1F;
+      --md-surface-variant: #E7E0EC;
+      --md-on-surface-variant: #49454F;
+      --md-outline: #79747E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--md-surface);
+      color: var(--md-on-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    main {
+      text-align: center;
+      max-width: 28rem;
+    }
+
+    .icon {
+      width: 5rem;
+      height: 5rem;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      background-color: var(--md-surface-variant);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      fill: var(--md-on-surface-variant);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--md-on-surface);
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--md-on-surface-variant);
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 1.25rem;
+      background-color: var(--md-primary);
+      color: var(--md-on-primary);
+      cursor: pointer;
+      min-width: 44px;
+      min-height: 44px;
+      transition: opacity 0.2s;
+    }
+
+    button:hover {
+      opacity: 0.88;
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--md-primary);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <main role="main" aria-label="Offline notification">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6a5.5 5.5 0 015.35 4.16l.34 1.34H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z"/>
+        <path d="M2.5 2.5l19 19" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>You are offline</h1>
+    <p>
+      It looks like you've lost your internet connection. Please check your
+      network settings and try again. Your cached content will still be available.
+    </p>
+    <button type="button" onclick="window.location.reload()">
+      Try again
+    </button>
+  </main>
+</body>
+</html>

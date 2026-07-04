@@ -1,0 +1,187 @@
+{
+  "common": {
+    "appName": "[AM] Money Conversion SPA",
+    "loading": "[AM] Cargando...",
+    "error": "[AM] Ocurrió un error",
+    "retry": "[AM] Reintentar",
+    "close": "[AM] Cerrar",
+    "save": "[AM] Guardar",
+    "delete": "[AM] Eliminar",
+    "cancel": "[AM] Cancelar",
+    "select": "[AM] Seleccionar"
+  },
+  "nav": {
+    "home": "[AM] Inicio",
+    "resources": "[AM] Recursos",
+    "admin": "[AM] Administración",
+    "darkMode": "[AM] Modo oscuro",
+    "lightMode": "[AM] Modo claro",
+    "openMenu": "[AM] Abrir menú",
+    "closeMenu": "[AM] Cerrar menú"
+  },
+  "hero": {
+    "title": "[AM] Tu Camino Hacia la Libertad Financiera",
+    "subtitle": "[AM] Recursos y herramientas seleccionados para ganar dinero.",
+    "cta": "[AM] Explorar Recursos",
+    "ctaSecondary": "[AM] Calcular tus Ingresos",
+    "socialProof": "[AM] Únete a miles que ya están aumentando sus ingresos"
+  },
+  "viral": {
+    "leaderboardTitle": "[AM] Recursos Más Compartidos",
+    "achievementEarned": "[AM] ¡Logro Desbloqueado!",
+    "activityFeed": "[AM] Actividad en Vivo",
+    "dailyCheckIn": "[AM] Registro Diario",
+    "incomeCalculator": "[AM] Calculadora de Ingresos",
+    "shareSuccess": "[AM] ¡Gracias por compartir!",
+    "copySuccess": "[AM] ¡Copiado al portapapeles!"
+  },
+  "admin": {
+    "title": "[AM] Panel de Administración",
+    "allLinks": "[AM] Todos los enlaces",
+    "create": "[AM] Crear",
+    "createLink": "[AM] Crear Enlace",
+    "editLink": "[AM] Editar Enlace",
+    "deleteLink": "[AM] Eliminar Enlace",
+    "confirmDelete": "[AM] ¿Estás seguro de eliminar este enlace?",
+    "deleteWarning": "[AM] Esta acción no se puede deshacer.",
+    "emptyLinks": "[AM] No hay enlaces aún. Crea el primero.",
+    "noLinks": "[AM] No hay enlaces.",
+    "titlePlaceholder": "[AM] Título",
+    "descriptionPlaceholder": "[AM] Descripción",
+    "categoryPlaceholder": "[AM] Categoría",
+    "urlPlaceholder": "[AM] URL",
+    "uploadImage": "[AM] Subir imagen",
+    "edit": "[AM] Editar",
+    "delete": "[AM] Eliminar"
+  },
+  "resources": {
+    "title": "[AM] Recursos",
+    "error": "[AM] Error al cargar recursos",
+    "noResourcesTitle": "[AM] No Hay Recursos Disponibles",
+    "noResourcesDescription": "[AM] Vuelve pronto para ver recursos seleccionados.",
+    "categories": {
+      "general": "[AM] General"
+    }
+  },
+  "badge": {
+    "gatedTitle": "[AM] Tus Logros",
+    "firstShare": "[AM] Primera Compartición",
+    "fiveShares": "[AM] 5 Comparticiones",
+    "tenShares": "[AM] 10 Comparticiones",
+    "earlyAccess": "[AM] Acceso Anticipado",
+    "sevenDayStreak": "[AM] Racha de 7 Días",
+    "twentyOneDayStreak": "[AM] Racha de 21 Días"
+  },
+  "notification": {
+    "morning": "[AM] ¡Buenos días! Comienza tu día con nuevas oportunidades.",
+    "evening": "[AM] ¡Buenas tardes! Revisa los mejores recursos de hoy.",
+    "weekend": "[AM] ¡Feliz fin de semana! Ponte al día con consejos para ganar dinero.",
+    "weekday": "[AM] Nuevas oportunidades te esperan.",
+    "welcomeFirst": "[AM] ¡Bienvenido! Nos alegra que estés aquí.",
+    "activityNow": "[AM] ahora mismo"
+  },
+  "exclusive": {
+    "title": "[AM] Área de Miembros Exclusivos",
+    "locked": "[AM] Completa una racha de registro diario para desbloquear contenido exclusivo.",
+    "unlock": "[AM] Comienza tu Racha",
+    "unlocked": "[AM] Contenido Exclusivo Desbloqueado",
+    "content": "[AM] Bienvenido al área de miembros exclusivos.",
+    "shareToUnlock": "[AM] Comparte con amigos para desbloquear contenido premium",
+    "unlockedMessage": "[AM] ¡Has desbloqueado contenido exclusivo!"
+  },
+  "checkin": {
+    "checkInNow": "[AM] Registrarse Ahora",
+    "days": "[AM] días",
+    "alreadyCheckedIn": "[AM] ¡Ya te has registrado hoy!"
+  },
+  "calculator": {
+    "subtitle": "[AM] Descubre cuánto podrías ganar",
+    "hourlyRate": "[AM] Tarifa por Hora",
+    "hoursPerWeek": "[AM] Horas por Semana",
+    "perYear": "[AM] por año",
+    "month": "[AM] mes"
+  },
+  "caseStudy": {
+    "title": "[AM] Historias de Éxito",
+    "subtitle": "[AM] Resultados reales de personas reales",
+    "challenge": "[AM] El Desafío",
+    "challengeText": "[AM] Antes de descubrir estos recursos, nuestros usuarios luchaban por encontrar fuentes de ingresos confiables.",
+    "solution": "[AM] La Solución",
+    "solutionText": "[AM] Usando nuestras herramientas y estrategias, transformaron su situación financiera.",
+    "results": "[AM] Los Resultados",
+    "metric1Label": "[AM] Aumento de Ingresos",
+    "metric1Value": "[AM] +340%",
+    "metric2Label": "[AM] Tiempo hasta el Primer Pago",
+    "metric2Value": "[AM] 14 días",
+    "metric3Label": "[AM] Usuarios Activos Mensuales",
+    "metric3Value": "[AM] 10,000+"
+  },
+  "successStory": {
+    "title": "[AM] De Ingreso Extra a Tiempo Completo",
+    "before": "[AM] Antes",
+    "beforeItem1": "[AM] Trabajando 9-5 sin ingresos extra",
+    "beforeItem2": "[AM] Sin conocimiento de oportunidades en línea",
+    "beforeItem3": "[AM] Estresado por las finanzas",
+    "after": "[AM] Después",
+    "afterItem1": "[AM] Ganando $5,000/mes en línea",
+    "afterItem2": "[AM] Múltiples fuentes de ingresos",
+    "afterItem3": "[AM] Libertad y flexibilidad financiera",
+    "shareCta": "[AM] Compartir Esta Historia"
+  },
+  "founder": {
+    "title": "[AM] Nuestra Historia",
+    "name": "[AM] Nombre del Fundador",
+    "quote": "[AM] Construí esta plataforma porque creo que todos merecen acceso a oportunidades legítimas de ganar dinero.",
+    "story1": "[AM] Después de años de prueba y error en el espacio de ingresos en línea, descubrí lo que realmente funciona.",
+    "story2": "[AM] Esta plataforma selecciona solo los mejores recursos probados para que no pierdas tiempo.",
+    "imageAlt": "[AM] Retrato del fundador"
+  },
+  "painPoints": {
+    "title": "[AM] Deja de Perder Tiempo. Empieza a Ganar.",
+    "before": "[AM] Sin nuestros recursos",
+    "after": "[AM] Con nuestros recursos"
+  },
+  "toolkit": {
+    "title": "[AM] Kit de Herramientas Gratuito",
+    "subtitle": "[AM] Todo lo que necesitas para empezar a ganar dinero en línea hoy",
+    "access": "[AM] Obtener Acceso Gratuito"
+  },
+  "share": {
+    "title": "[AM] Compartir con Amigos",
+    "subtitle": "[AM] Ayuda a otros a descubrir estos recursos",
+    "copyLink": "[AM] Copiar Enlace",
+    "twitter": "[AM] Compartir en Twitter",
+    "linkedin": "[AM] Compartir en LinkedIn"
+  },
+  "content": {
+    "previewsTitle": "[AM] Lo Que Obtendrás"
+  },
+  "pwa": {
+    "installButton": "[AM] Instalar App",
+    "installPrompt": "[AM] Instala esta app para acceso rápido"
+  },
+  "footer": {
+    "tagline": "[AM] Ayudándote a construir libertad financiera",
+    "navigation": "[AM] Navegación",
+    "language": "[AM] Idioma",
+    "contact": "[AM] Contacto",
+    "privacy": "[AM] Política de Privacidad",
+    "terms": "[AM] Términos de Servicio"
+  },
+  "accessibility": {
+    "loading": "[AM] Cargando...",
+    "siteFooter": "[AM] Pie de página"
+  },
+  "validation": {
+    "fileTooLarge": "[AM] El archivo debe ser menor de 2MB"
+  },
+  "home": {
+    "title": "[AM] Money Conversion SPA"
+  },
+  "primaryCta": "[AM] Comenzar",
+  "secondaryCta": "[AM] Más Información",
+  "cancel": "[AM] Cancelar",
+  "confirm": "[AM] Confirmar",
+  "remove": "[AM] Eliminar",
+  "navigate": "[AM] Navegar"
+}
