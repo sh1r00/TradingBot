@@ -7,6 +7,7 @@ import { ref, computed } from 'vue'
 
 const STORAGE_KEY = 'money_auth'
 const USERS_KEY = 'money_users'
+const RESET_TOKENS_KEY = 'money_reset_tokens'
 
 export interface AuthUser {
   id: string
@@ -47,6 +48,19 @@ function saveSession(session: { token: string; user: AuthUser } | null): void {
   } else {
     localStorage.removeItem(STORAGE_KEY)
   }
+}
+
+function loadResetTokens(): Record<string, { email: string; createdAt: number }> {
+  try {
+    const raw = localStorage.getItem(RESET_TOKENS_KEY)
+    return raw ? JSON.parse(raw) : {}
+  } catch {
+    return {}
+  }
+}
+
+function saveResetTokens(tokens: Record<string, { email: string; createdAt: number }>): void {
+  localStorage.setItem(RESET_TOKENS_KEY, JSON.stringify(tokens))
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -112,6 +126,54 @@ export const useAuthStore = defineStore('auth', () => {
     saveSession(null)
   }
 
+  /**
+   * Request a password reset by email.
+   * Returns the reset token if email found (so user can use it directly in PWA flow).
+   */
+  function requestPasswordReset(email: string): string | null {
+    const users = loadUsers()
+    const user = users.find((u) => u.email === email)
+    if (!user) return null
+
+    const token = 'reset_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8)
+    const resetTokens = loadResetTokens()
+    resetTokens[token] = { email, createdAt: Date.now() }
+    saveResetTokens(resetTokens)
+    return token
+  }
+
+  /**
+   * Reset password using a valid reset token.
+   */
+  function resetPassword(token: string, newPassword: string): boolean {
+    const resetTokens = loadResetTokens()
+    const entry = resetTokens[token]
+    if (!entry) return false
+
+    // Token expires after 1 hour
+    if (Date.now() - entry.createdAt > 3600000) {
+      delete resetTokens[token]
+      saveResetTokens(resetTokens)
+      return false
+    }
+
+    const users = loadUsers()
+    const userIndex = users.findIndex((u) => u.email === entry.email)
+    if (userIndex === -1) {
+      delete resetTokens[token]
+      saveResetTokens(resetTokens)
+      return false
+    }
+
+    users[userIndex].password = newPassword
+    saveUsers(users)
+
+    // Clean up used token
+    delete resetTokens[token]
+    saveResetTokens(resetTokens)
+    return true
+  }
+
   return {
     session,
     initialized,
@@ -121,5 +183,7 @@ export const useAuthStore = defineStore('auth', () => {
     signup,
     login,
     logout,
+    requestPasswordReset,
+    resetPassword,
   }
 })

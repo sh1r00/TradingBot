@@ -117,6 +117,15 @@ function handleLogin() {
           />
         </div>
 
+        <div class="flex justify-end">
+          <NuxtLink
+            :to="localePath('/forgot-password')"
+            class="text-sm text-primary hover:underline"
+          >
+            Forgot your password?
+          </NuxtLink>
+        </div>
+
         <button
           type="submit"
           :disabled="isSubmitting"

@@ -65,10 +65,7 @@ useSeoMeta({
       @secondary-cta="scrollToCalculator"
     />
 
-    <!-- 2. Countdown -->
-    <OCountdownTimer />
-
-    <!-- 3. Notification -->
+    <!-- 2. Notification -->
     <ONotificationBar />
 
     <!-- 4. Leaderboard -->

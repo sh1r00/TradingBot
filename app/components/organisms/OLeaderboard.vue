@@ -102,8 +102,14 @@ onMounted(() => {
         <li
           v-for="(resource, index) in topResources"
           :key="resource.id"
-          class="group flex items-center gap-4 bg-surface-container rounded-xl p-4 hover:bg-surface-container-high transition-colors duration-150"
         >
+          <a
+            :href="resource.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="`${resource.title} - ${t('common.openInNewTab', { resource: resource.title })}`"
+            class="group flex items-center gap-4 bg-surface-container rounded-xl p-4 hover:bg-surface-container-high transition-colors duration-150 no-underline"
+          >
           <!-- Rank indicator -->
           <span
             class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors duration-150"
@@ -130,12 +136,17 @@ onMounted(() => {
             </p>
           </div>
 
-          <!-- External link icon (rendered by ALink's external prop) -->
-          <ALink
-            :href="resource.url"
-            :aria-label="`${resource.title} - ${t('common.openInNewTab', { resource: resource.title })}`"
-            external
-          />
+          <!-- External link indicator -->
+          <svg
+            class="w-4 h-4 shrink-0 text-on-surface-variant group-hover:text-primary transition-colors"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          </a>
         </li>
       </ol>
     </div>
