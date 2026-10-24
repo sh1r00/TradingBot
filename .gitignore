@@ -6,3 +6,11 @@ dist
 *.log
 test-results
 temp_install
+
+# Local Netlify folder
+.netlify
+
+# Environment files
+.env
+.env.*
+!.env.example
