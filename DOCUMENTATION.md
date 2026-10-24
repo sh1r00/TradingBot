@@ -19,3 +19,6 @@ Nuxt 4 · Vue 3 · Pinia · Tailwind v4 · @nuxtjs/i18n · @nuxtjs/seo · @vite-
 
 ## Deployment
 SSG (`nuxi generate` → `.output/public`), Netlify.
+
+## TODO / Roadmap
+- [ ] Point a custom domain (optional) — for client-facing work; a single wildcard domain can cover all sites.
