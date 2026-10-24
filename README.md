@@ -56,3 +56,9 @@ Deploy .output/public to Netlify via: npx netlify deploy --prod --dir=.output/pu
 ---
 
 *Made with ❤️ by shiro — rasisg@gmail.com — github.com/sh1r00*
+
+---
+
+## 📚 Documentation & Pitfalls
+
+Full documentation (steps, functionality, pitfalls & fixes): [DOCUMENTATION.md](DOCUMENTATION.md)
