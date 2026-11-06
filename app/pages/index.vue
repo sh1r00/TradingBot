@@ -65,52 +65,55 @@ useSeoMeta({
       @secondary-cta="scrollToCalculator"
     />
 
+    <!-- Marquee (decorative) -->
+    <MMarquee />
+
     <!-- 2. Notification -->
-    <ONotificationBar />
+    <ONotificationBar v-reveal />
 
     <!-- 4. Leaderboard -->
-    <OLeaderboard />
+    <OLeaderboard v-reveal />
 
     <!-- 5. Live Activity -->
-    <OLiveActivityFeed />
+    <OLiveActivityFeed v-reveal />
 
     <!-- 6. Achievements -->
-    <OAchievementBadge />
+    <OAchievementBadge v-reveal />
 
     <!-- 7. Pain Points -->
-    <OPainPoint />
+    <OPainPoint v-reveal />
 
     <!-- 8. Income Calculator -->
-    <div id="income-calculator">
+    <div id="income-calculator" v-reveal>
       <OIncomeCalculator />
     </div>
 
     <!-- 9. Daily Check-In -->
-    <ODailyCheckIn />
+    <ODailyCheckIn v-reveal />
 
     <!-- 10. Exclusive Access -->
-    <OExclusiveAccess />
+    <OExclusiveAccess v-reveal />
 
     <!-- 11. Free Toolkit -->
-    <OFreeToolkit />
+    <OFreeToolkit v-reveal />
 
     <!-- 12. Content Previews -->
-    <OContentPreviews />
+    <OContentPreviews v-reveal />
 
     <!-- 13. Lead Capture -->
-    <OLeadCapture />
+    <OLeadCapture v-reveal />
 
     <!-- 14. Case Study -->
-    <OCaseStudy />
+    <OCaseStudy v-reveal />
 
     <!-- 15. Success Story -->
-    <OSuccessStory />
+    <OSuccessStory v-reveal />
 
     <!-- 16. Founder Story -->
-    <OFounderStory />
+    <OFounderStory v-reveal />
 
     <!-- 17. Share Section -->
-    <div id="share-section">
+    <div id="share-section" v-reveal>
       <OShareSection />
     </div>
   </div>
