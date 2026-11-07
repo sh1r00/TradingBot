@@ -1,10 +1,26 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useResourcesStore } from '~/stores/resources'
+import { useResourcesStore, type ResourceLink } from '~/stores/resources'
 
 const { t } = useI18n()
 const resourcesStore = useResourcesStore()
+
+/**
+ * Resolve a resource's display text. Seeded resources (`key`) render from i18n
+ * (`resources.items.<key>.*`); admin-created links fall back to literal text.
+ */
+function displayTitle(link: ResourceLink): string {
+  return link.key ? t(`resources.items.${link.key}.title`) : (link.title || '')
+}
+
+function displayDescription(link: ResourceLink): string {
+  return link.key ? t(`resources.items.${link.key}.description`) : (link.description || '')
+}
+
+function displayCategory(link: ResourceLink): string {
+  return link.key ? t(`resources.items.${link.key}.category`) : (link.category || t('resources.categories.general'))
+}
 
 // Group published resource links by category
 const groupedResources = computed(() => {
@@ -14,7 +30,7 @@ const groupedResources = computed(() => {
     // Only show published links
     if (!link.isPublished) continue
     
-    const category = link.category || t('resources.categories.general')
+    const category = displayCategory(link)
     if (!groups.has(category)) {
       groups.set(category, [])
     }
@@ -154,8 +170,8 @@ onMounted(() => {
               :key="link.id"
             >
               <MResourceCard
-                :title="link.title"
-                :description="link.description"
+                :title="displayTitle(link)"
+                :description="displayDescription(link)"
                 :category="category"
                 :url="link.url"
                 :thumbnail="link.thumbnail || ''"

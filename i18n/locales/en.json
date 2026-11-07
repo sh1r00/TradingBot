@@ -34,6 +34,14 @@
     "shareSuccess": "Thanks for sharing!",
     "copySuccess": "Copied to clipboard!"
   },
+  "market": {
+    "title": "Live Market Movers",
+    "refresh": "Refresh",
+    "empty": "No significant market movement right now.",
+    "unavailable": "Live market data is unavailable right now. Check back shortly.",
+    "stale": "Data may be delayed.",
+    "change24h": "24h"
+  },
   "admin": {
     "title": "Admin Panel",
     "allLinks": "All resource links",
@@ -58,8 +66,59 @@
     "error": "Failed to load resources",
     "noResourcesTitle": "No Resources Available Yet",
     "noResourcesDescription": "Check back soon for curated money-making resources.",
+    "emptyCategory": "No {category} resources yet.",
     "categories": {
       "general": "General"
+    },
+    "items": {
+      "scrambly": {
+        "title": "Scrambly — Get Paid to Play Games",
+        "description": "Earn cash and gift cards by playing games, testing apps, and completing quick offers.",
+        "category": "Gaming",
+        "blogHowItWorks": "Scrambly is a rewards platform where advertisers pay you (through the platform) to try games and apps, complete surveys, and reach milestones inside mobile games. You accumulate points or cash, which you can redeem for gift cards or money. The platform earns from advertisers and passes a share back to you.",
+        "blogHowToStart": "Sign up for a free account, browse the available offers, and pick games you would genuinely enjoy or tasks that fit your spare time. Read the payout terms for each offer before starting, and cash out as soon as you hit the minimum threshold to confirm everything works.",
+        "blogExpectations": "This is small, inconsistent money — not a salary. Most people earn a few dollars a day at best, and offers slow down over time. Treat it as a low-effort way to earn a little extra, not as a primary income source."
+      },
+      "webull": {
+        "title": "Webull — Commission-Free Investing",
+        "description": "Trade stocks, ETFs, and options with zero commissions and fractional shares.",
+        "category": "Investing",
+        "blogHowItWorks": "Webull is a brokerage app that lets you buy and sell stocks, ETFs, and options without paying a per-trade commission. You fund an account, place trades from your phone or desktop, and can buy fractional shares of expensive stocks. Your returns come from the investments themselves rising in value or paying dividends — not from the app.",
+        "blogHowToStart": "Open an account, complete identity verification, and fund it with an amount you can afford to lose. Start with broad, low-cost index ETFs rather than individual stocks. Learn the basics of risk and diversification before trading options or using leverage.",
+        "blogExpectations": "Investing is for building wealth over years, not getting rich quickly. Markets go up and down, and you can lose money. Historical stock-market returns average in the single to low double digits per year over long periods — expect slow, compounding growth, not fast payouts."
+      },
+      "mercor": {
+        "title": "Mercor — Paid Work in the AI Field",
+        "description": "Get paid to train and evaluate AI models on flexible, remote tasks.",
+        "category": "AI Work",
+        "blogHowItWorks": "Mercor connects people with companies that need humans to evaluate and improve AI models. You apply, complete assessments, and — if accepted — take on contract tasks like rating model responses, writing examples, or checking outputs. You are paid per task or per hour depending on the project.",
+        "blogHowToStart": "Apply through the platform and take the screening assessments seriously, since they gate access to work. Keep your profile complete and respond to project invitations promptly. Availability and consistency matter more than credentials for many tasks.",
+        "blogExpectations": "Pay varies widely by project and your performance. It is genuine but competitive contract work, not guaranteed hours — you may go stretches without tasks. Expect to build a track record first, then see steadier opportunities."
+      },
+      "upwork-fiverr": {
+        "title": "Upwork & Fiverr — Freelancing",
+        "description": "Sell your skills on the world's largest freelance marketplaces and set your own rates.",
+        "category": "Freelancing",
+        "blogHowItWorks": "Upwork and Fiverr are marketplaces where clients post jobs and freelancers bid or list their services. You create a profile, showcase your skills, and either submit proposals (Upwork) or offer fixed-price \"gigs\" (Fiverr). The platform takes a cut of what you earn, and handles some payment protection in exchange.",
+        "blogHowToStart": "Pick one skill you can deliver well — writing, design, programming, admin, translation — and build a focused profile with 2-3 portfolio pieces. Set competitive starter rates to win your first few reviews, then raise prices as your reputation grows. Apply consistently and personalize each proposal.",
+        "blogExpectations": "Freelancing rewards consistency and niche expertise, but the first client is the hardest and income is lumpy. Expect to underprice at first, pay a platform fee, and spend real time on outreach before steady work arrives. It can grow into a full income, but that usually takes months to years."
+      },
+      "amazon-associates": {
+        "title": "Amazon Associates — Affiliate Marketing",
+        "description": "Earn commissions by recommending products you genuinely use and trust.",
+        "category": "Affiliate Marketing",
+        "blogHowItWorks": "Amazon Associates lets you earn a commission when someone clicks your special link and buys a product. You generate affiliate links for products, share them in content (a blog, newsletter, YouTube, or social posts), and Amazon pays you a percentage of qualifying sales. You must disclose the affiliate relationship to your audience.",
+        "blogHowToStart": "Apply for the program, then build an audience or content channel around a topic you know. Create genuinely useful content — reviews, comparisons, how-to guides — and place relevant product links inside it. You typically must make a qualifying sale within a set window to keep your account active.",
+        "blogExpectations": "Commission rates are low (often a few percent) and you only earn when people actually buy. This is a long game: you need real traffic and trust before it pays meaningfully. Expect months of work with little return before it compounds, and never buy products just to inflate numbers."
+      },
+      "depop": {
+        "title": "Depop — Sell & Resell Items",
+        "description": "Turn clothes, shoes, and collectibles you no longer use into cash.",
+        "category": "Reselling",
+        "blogHowItWorks": "Depop is a marketplace for secondhand and vintage fashion. You list items with photos and prices, buyers purchase through the app, and you ship the item. You keep the sale price minus Depop's fees and shipping costs. The platform handles payment and provides some buyer/seller protection.",
+        "blogHowToStart": "Start with what you already own — clothes, shoes, or accessories in good condition. Take clear photos in natural light, write honest descriptions with measurements, and price by checking what similar sold items go for. Ship promptly and build positive reviews.",
+        "blogExpectations": "Reselling pays what the market will bear; some items sell fast, others sit for weeks. Expect to research, photograph, list, and ship — it is real work per item. Most sellers earn side money, not a salary, and success comes from sourcing items cheaply and listing consistently."
+      }
     }
   },
   "notification": {

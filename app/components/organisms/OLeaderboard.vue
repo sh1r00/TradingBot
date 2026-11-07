@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useResourcesStore } from '~/stores/resources'
+import { useResourcesStore, type ResourceLink } from '~/stores/resources'
 
 const { t } = useI18n()
 const resourcesStore = useResourcesStore()
+
+/**
+ * Resolve a resource's display text. Seeded resources (`key`) render from i18n;
+ * admin-created links fall back to literal text.
+ */
+function displayTitle(link: ResourceLink): string {
+  return link.key ? t(`resources.items.${link.key}.title`) : (link.title || '')
+}
+
+function displayCategory(link: ResourceLink): string {
+  return link.key ? t(`resources.items.${link.key}.category`) : (link.category || t('resources.categories.general'))
+}
 
 // Sort resources by displayOrder (admin-defined order) for leaderboard
 const topResources = computed(() => {
@@ -107,7 +119,7 @@ onMounted(() => {
             :href="resource.url"
             target="_blank"
             rel="noopener noreferrer"
-            :aria-label="`${resource.title} - ${t('common.openInNewTab', { resource: resource.title })}`"
+            :aria-label="`${displayTitle(resource)} - ${t('common.openInNewTab', { resource: displayTitle(resource) })}`"
             class="group flex items-center gap-4 bg-surface-container rounded-xl p-4 hover:bg-surface-container-high transition-colors duration-150 no-underline"
           >
           <!-- Rank indicator -->
@@ -129,10 +141,10 @@ onMounted(() => {
             <p
               class="font-medium text-on-surface truncate group-hover:text-primary transition-colors"
             >
-              {{ resource.title }}
+              {{ displayTitle(resource) }}
             </p>
             <p class="text-sm text-on-surface-variant truncate">
-              {{ resource.category || t('resources.categories.general') }}
+              {{ displayCategory(resource) }}
             </p>
           </div>
 

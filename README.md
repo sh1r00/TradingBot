@@ -1,64 +1,69 @@
 # Money Conversion SPA
-*shiro — where style meets function*
 
-**Category: Finance Live Project**  
-**Live:** [https://trading-bot-sh1r00-332.netlify.app](https://trading-bot-sh1r00-332.netlify.app)  
-**GitHub:** [TradingBot](https://github.com/sh1r00/TradingBot)  
+A Nuxt 4 statically-generated PWA that curates legitimate, vetted money-making resources —
+translated into English, Español, and አማርኛ — and surfaces a **real** live market-movers feed
+from CoinGecko. No fabricated activity, no invented earnings claims.
 
-## About This Project
-
-Curated money-making resources and income calculator. Trading tools, financial calculators, and resource aggregation.
-
-**Tech:** 
-Nuxt 4, Vue 3, Pinia, Tailwind CSS, PWA, Dark Mode, M3 Design
+**Live:** [trading-bot-sh1r00-332.netlify.app](https://trading-bot-sh1r00-332.netlify.app)
+**GitHub:** [sh1r00/TradingBot](https://github.com/sh1r00/TradingBot)
 
 [![shiro](https://img.shields.io/badge/shiro-where_style_meets_function-6C5CE7)](https://shiro-portfolio-sh1r00.netlify.app)
 
-## Deployment
+---
+
+## What it does
+
+- **Six curated money-making methods** — gaming rewards (Scrambly), commission-free investing
+  (Webull), AI-work platforms (Mercor), freelancing (Upwork & Fiverr), affiliate marketing
+  (Amazon Associates), and reselling (Depop). Each has a translated title/description and a
+  3-paragraph "how it works / how to start / realistic expectations" guide.
+- **Honest live market feed** — real CoinGecko "significant movers", filtered server-side.
+- **Income calculator**, share/engagement sections, and an admin CRUD panel for the links.
+
+## Tech stack
+
+Nuxt 4 · Vue 3 · Pinia · Tailwind CSS v4 · Material Design 3 · `@nuxtjs/i18n` (en/es/am) ·
+`@nuxtjs/seo` · `@vite-pwa/nuxt` · `nuxt-security` · Nitro (server route) · Netlify (static).
+
+## Architecture highlights
+
+- **Atomic components** — `app/components/{atoms,molecules,organisms}`.
+- **i18n lockstep** — all strings in `i18n/locales/{en,es,am}.json`; verified identical key sets
+  via `scripts/check-i18n-lockstep.cjs`.
+- **Real market feed** — `server/api/market/activity.get.ts` → free CoinGecko API →
+  `app/utils/marketFilter.ts` (pure, unit-tested) → `OLiveActivityFeed.vue`. No keys required.
+- **Resources store** — seeds carry an i18n `key` + official `url` + an empty `trackingUrl`
+  (affiliate IDs are PENDING, flagged in `TODO_POST_DEPLOY.md`).
+
+## Quick start
 
 ```bash
-npx nuxi generate
-```bash
-Deploy .output/public to Netlify via: npx netlify deploy --prod --dir=.output/public
+npm install --legacy-peer-deps   # first time only
+npm run dev                      # http://localhost:3000
 ```
 
-## Quick Start (Local Development)
+## Build & deploy
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Start development server:
-   ```bash
-   npm run dev
-   ```
-
-3. Build for production:
-   ```bash
-   npm run generate
-   ```
-
-4. Preview production build:
-   ```bash
-   npx serve .output/public
-   ```
+```bash
+npm run test:unit                # Vitest unit tests
+npm run build                    # SSR build (includes the API route)
+npm run generate                 # static SSG → .output/public
+npx netlify deploy --prod --dir=.output/public
+```
 
 ## Notes
 
-- Built with Nuxt 4 (compatibilityVersion 4) and Vue 3 Composition API
-- All projects use atomic design: atoms/ → molecules/ → organisms/
-- Dark mode is SSR-safe via Pinia store with useCookie() persistence
-- PWA configured with service worker for offline access
-- CSP headers configured via nuxt-security module (production only)
-- i18n supports 3 locales: English, Español, አማርኛ
+- Dark mode is SSR-safe via a Pinia store + `useCookie()` persistence.
+- PWA: autoUpdate service worker, offline fallback, 192/512/maskable icons.
+- CSP headers via `nuxt-security` (SSG-safe, `hashScripts: false`).
+- i18n: `prefix_except_default` — `en` has no prefix; `/es` and `/am` are prefixed.
+
+## 📚 Full documentation
+
+Architecture, the resources feature, the market-feed backend plan, and every pitfall + fix:
+**[DOCUMENTATION.md](DOCUMENTATION.md)**. Deferred/spoofed data to fix before go-live:
+**[TODO_POST_DEPLOY.md](TODO_POST_DEPLOY.md)**.
 
 ---
 
 *Made with ❤️ by shiro — rasisg@gmail.com — github.com/sh1r00*
-
----
-
-## 📚 Documentation & Pitfalls
-
-Full documentation (steps, functionality, pitfalls & fixes): [DOCUMENTATION.md](DOCUMENTATION.md)

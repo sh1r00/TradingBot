@@ -34,6 +34,14 @@
     "shareSuccess": "¡Gracias por compartir!",
     "copySuccess": "¡Copiado al portapapeles!"
   },
+  "market": {
+    "title": "Movimientos del Mercado en Vivo",
+    "refresh": "Actualizar",
+    "empty": "No hay movimientos significativos del mercado en este momento.",
+    "unavailable": "Los datos del mercado en vivo no están disponibles ahora. Vuelve pronto.",
+    "stale": "Los datos pueden estar retrasados.",
+    "change24h": "24h"
+  },
   "admin": {
     "title": "Panel de Administración",
     "allLinks": "Todos los enlaces",
@@ -58,8 +66,59 @@
     "error": "Error al cargar recursos",
     "noResourcesTitle": "No Hay Recursos Disponibles",
     "noResourcesDescription": "Vuelve pronto para ver recursos seleccionados.",
+    "emptyCategory": "Aún no hay recursos de {category}.",
     "categories": {
       "general": "General"
+    },
+    "items": {
+      "scrambly": {
+        "title": "Scrambly — Gana Dinero Jugando",
+        "description": "Gana efectivo y tarjetas de regalo jugando, probando apps y completando ofertas rápidas.",
+        "category": "Juegos",
+        "blogHowItWorks": "Scrambly es una plataforma de recompensas donde los anunciantes te pagan (a través de la plataforma) por probar juegos y apps, completar encuestas y alcanzar metas dentro de juegos móviles. Acumulas puntos o efectivo que puedes canjear por tarjetas de regalo o dinero. La plataforma gana de los anunciantes y te devuelve una parte.",
+        "blogHowToStart": "Regístrate con una cuenta gratuita, revisa las ofertas disponibles y elige juegos que de verdad disfrutes o tareas que se ajusten a tu tiempo libre. Lee los términos de pago de cada oferta antes de empezar y retira el dinero en cuanto alcances el mínimo para confirmar que todo funciona.",
+        "blogExpectations": "Es dinero pequeño e irregular, no un sueldo. La mayoría gana unos pocos dólares al día como mucho, y las ofertas se ralentizan con el tiempo. Trátalo como una forma de bajo esfuerzo para ganar un extra, no como una fuente principal de ingresos."
+      },
+      "webull": {
+        "title": "Webull — Inversión Sin Comisiones",
+        "description": "Opera acciones, ETFs y opciones con cero comisiones y fracciones de acciones.",
+        "category": "Inversión",
+        "blogHowItWorks": "Webull es una app de corretaje que te permite comprar y vender acciones, ETFs y opciones sin pagar comisión por operación. Financias una cuenta, realizas operaciones desde tu móvil u ordenador y puedes comprar fracciones de acciones caras. Tus rendimientos provienen de que las inversiones suban de valor o paguen dividendos, no de la app.",
+        "blogHowToStart": "Abre una cuenta, completa la verificación de identidad y finánciala con una cantidad que puedas permitirte perder. Empieza con ETFs de índice amplios y de bajo costo en lugar de acciones individuales. Aprende lo básico sobre riesgo y diversificación antes de operar con opciones o usar apalancamiento.",
+        "blogExpectations": "Invertir es para crear patrimonio a lo largo de años, no para enriquecerse rápido. Los mercados suben y bajan, y puedes perder dinero. Históricamente, la bolsa rinde en promedio entre un dígito y poco más de diez por ciento al año en el largo plazo: espera un crecimiento lento y compuesto, no pagos rápidos."
+      },
+      "mercor": {
+        "title": "Mercor — Trabajo Remunerado en IA",
+        "description": "Recibe un pago por entrenar y evaluar modelos de IA en tareas flexibles y remotas.",
+        "category": "Trabajo en IA",
+        "blogHowItWorks": "Mercor conecta personas con empresas que necesitan humanos para evaluar y mejorar modelos de IA. Postulas, completas evaluaciones y, si te aceptan, realizas tareas por contrato como calificar respuestas de modelos, escribir ejemplos o revisar resultados. Te pagan por tarea o por hora según el proyecto.",
+        "blogHowToStart": "Postula a través de la plataforma y tómate en serio las evaluaciones de selección, ya que condicionan el acceso al trabajo. Mantén tu perfil completo y responde con prontitud a las invitaciones de proyectos. La disponibilidad y la constancia importan más que los títulos en muchas tareas.",
+        "blogExpectations": "El pago varía mucho según el proyecto y tu desempeño. Es trabajo por contrato real pero competitivo, sin horas garantizadas: puedes pasar temporadas sin tareas. Espera construir primero un historial y luego ver oportunidades más estables."
+      },
+      "upwork-fiverr": {
+        "title": "Upwork y Fiverr — Freelance",
+        "description": "Vende tus habilidades en los mayores mercados de freelance y fija tus propias tarifas.",
+        "category": "Freelance",
+        "blogHowItWorks": "Upwork y Fiverr son mercados donde los clientes publican trabajos y los freelancers pujan o listan sus servicios. Creas un perfil, muestras tus habilidades y presentas propuestas (Upwork) u ofreces \"gigs\" de precio fijo (Fiverr). La plataforma se lleva una parte de lo que ganas y, a cambio, ofrece cierta protección de pago.",
+        "blogHowToStart": "Elige una habilidad que domines —redacción, diseño, programación, administración, traducción— y crea un perfil enfocado con 2-3 piezas de portafolio. Fija tarifas iniciales competitivas para ganar tus primeras reseñas y luego sube los precios a medida que crezca tu reputación. Postula con constancia y personaliza cada propuesta.",
+        "blogExpectations": "El freelance premia la constancia y el nicho, pero el primer cliente es el más difícil y los ingresos son irregulares. Espera cobrar poco al principio, pagar comisión a la plataforma y dedicar tiempo real a la prospección antes de que llegue trabajo estable. Puede convertirse en un ingreso completo, pero suele tardar meses o años."
+      },
+      "amazon-associates": {
+        "title": "Amazon Afiliados — Marketing de Afiliación",
+        "description": "Gana comisiones recomendando productos que de verdad usas y en los que confías.",
+        "category": "Marketing de Afiliación",
+        "blogHowItWorks": "Amazon Afiliados te permite ganar una comisión cuando alguien hace clic en tu enlace especial y compra un producto. Generas enlaces de afiliado para productos, los compartes en contenido (un blog, boletín, YouTube o publicaciones sociales) y Amazon te paga un porcentaje de las ventas válidas. Debes revelar la relación de afiliado a tu audiencia.",
+        "blogHowToStart": "Solicita el programa y luego construye una audiencia o canal de contenido sobre un tema que conozcas. Crea contenido realmente útil —reseñas, comparativas, guías— y coloca enlaces de producto relevantes dentro. Por lo general debes lograr una venta válida dentro de un plazo para mantener activa la cuenta.",
+        "blogExpectations": "Las comisiones son bajas (a menudo un pequeño porcentaje) y solo ganas cuando la gente compra de verdad. Es un juego a largo plazo: necesitas tráfico y confianza reales antes de que pague. Espera meses de trabajo con poco retorno antes de que se acumule, y nunca compres productos solo para inflar cifras."
+      },
+      "depop": {
+        "title": "Depop — Vender y Revender Artículos",
+        "description": "Convierte en efectivo la ropa, el calzado y los objetos que ya no usas.",
+        "category": "Reventa",
+        "blogHowItWorks": "Depop es un mercado de moda de segunda mano y vintage. Publicas artículos con fotos y precios, los compradores compran a través de la app y tú envías el artículo. Te quedas con el precio de venta menos las comisiones de Depop y los costos de envío. La plataforma gestiona el pago y ofrece cierta protección a compradores y vendedores.",
+        "blogHowToStart": "Empieza con lo que ya tienes: ropa, calzado o accesorios en buen estado. Saca fotos claras con luz natural, escribe descripciones honestas con medidas y fija el precio revisando cuánto se paga por artículos similares vendidos. Envía con prontitud y acumula reseñas positivas.",
+        "blogExpectations": "La reventa paga lo que el mercado esté dispuesto a pagar; algunos artículos se venden rápido y otros se quedan semanas. Espera investigar, fotografiar, publicar y enviar: es trabajo real por cada artículo. La mayoría gana un dinero extra, no un sueldo, y el éxito viene de conseguir artículos baratos y publicar con constancia."
+      }
     }
   },
   "notification": {
@@ -95,7 +154,10 @@
     "metric2Label": "Tiempo hasta el Primer Pago",
     "metric2Value": "14 días",
     "metric3Label": "Usuarios Activos Mensuales",
-    "metric3Value": "10,000+"
+    "metric3Value": "10,000+",
+    "resultItem1": "Construyó un portafolio de ingresos diversificado en 3 plataformas",
+    "resultItem2": "Logró independencia financiera en 12 meses",
+    "resultItem3": "Ahora asesora a más de 50 personas en el mismo proceso"
   },
   "successStory": {
     "title": "De Ingreso Extra a Tiempo Completo",

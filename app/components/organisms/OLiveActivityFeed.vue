@@ -1,68 +1,106 @@
 <script setup lang="ts">
-import { fetchLiveActivity, generateActivity, type ActivityItem } from '~/data/liveActivity'
+/**
+ * Live Market Movers — REAL CoinGecko data, no fabricated events.
+ *
+ * Fetches `/api/market/activity` (server route `server/api/market/activity.get.ts`),
+ * which proxies the free CoinGecko `/coins/markets` endpoint and applies the
+ * market filter (`app/utils/marketFilter.ts`) to surface only "significant movers"
+ * (|24h change| >= 1%, stablecoins excluded).
+ *
+ * The previous fake feed (`SEED_ACTIVITIES` / `SIMULATED_MESSAGES` + a `setInterval`
+ * that invented a new event every 8–15s) has been removed entirely. Nothing here
+ * is simulated: if the API is unreachable (e.g. a static host with no server), we
+ * show a truthful "unavailable" state instead of inventing movement.
+ */
+
+interface MarketMover {
+  asset_id: string
+  symbol: string
+  price_usd: number
+  change_24h_pct: number
+  change_7d_pct: number | null
+  volume_24h_usd: number
+}
+
+interface MarketActivityResponse {
+  movers: MarketMover[]
+  snapshots: MarketMover[]
+  stale: boolean
+  source: string
+  fetchedAt?: string
+}
 
 const { t } = useI18n()
 
-const activities = ref<ActivityItem[]>([])
+const movers = ref<MarketMover[]>([])
 const isLoading = ref(true)
-const liveMessage = ref('')
-let activityIndex = 0
-let fetchIntervalId: ReturnType<typeof setInterval> | null = null
-let liveIntervalId: ReturnType<typeof setInterval> | null = null
+const isUnavailable = ref(false)
+const isStale = ref(false)
+let refreshTimer: ReturnType<typeof setInterval> | null = null
 
-// Fetch initial data on mount, fall back to seed data
-onMounted(async () => {
+async function load(): Promise<void> {
   try {
-    const data = await fetchLiveActivity()
-    activities.value = data.length > 0 ? data : []
+    const data = await $fetch<MarketActivityResponse>('/api/market/activity')
+    movers.value = Array.isArray(data?.movers) ? data.movers : []
+    isStale.value = Boolean(data?.stale)
+    isUnavailable.value = false
   } catch {
-    // Silent failure — empty state will show
+    // Fetch failed (e.g. static host with no API route) — never fabricate.
+    movers.value = []
+    isUnavailable.value = true
   } finally {
     isLoading.value = false
   }
+}
 
-  // Simulate new activity every 8-15 seconds (randomized)
-  fetchIntervalId = setInterval(() => {
-    const newActivity = generateActivity()
-    activities.value = [newActivity, ...activities.value].slice(0, 10)
-  }, 8000 + Math.floor(Math.random() * 7000))
-
-  // Rotate screen reader announcement every 10s
-  liveIntervalId = setInterval(() => {
-    if (activities.value.length > 0) {
-      liveMessage.value = activities.value[activityIndex % activities.value.length].message
-      activityIndex++
-    }
-  }, 10000)
+onMounted(() => {
+  load()
+  // Periodically re-fetch the REAL feed (60s). No simulated events are generated.
+  refreshTimer = setInterval(load, 60_000)
 })
 
 onUnmounted(() => {
-  if (fetchIntervalId) clearInterval(fetchIntervalId)
-  if (liveIntervalId) clearInterval(liveIntervalId)
+  if (refreshTimer) clearInterval(refreshTimer)
 })
 
-function timeAgo(date: Date): string {
-  const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
-  if (seconds < 60) return t('notification.activityNow') || 'just now'
-  const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return `${minutes}m ago`
-  const hours = Math.floor(minutes / 60)
-  return `${hours}h ago`
+function formatPrice(v: number): string {
+  if (v >= 1000) return v.toLocaleString('en-US', { maximumFractionDigits: 0 })
+  if (v >= 1) return v.toLocaleString('en-US', { maximumFractionDigits: 2 })
+  return v.toLocaleString('en-US', { maximumFractionDigits: 4 })
+}
+
+function formatPct(v: number): string {
+  const sign = v >= 0 ? '+' : ''
+  return `${sign}${v.toFixed(2)}%`
+}
+
+function moverClass(v: number): string {
+  return v >= 0 ? 'text-success' : 'text-error'
 }
 </script>
 
 <template>
   <section
     class="py-12 px-4 bg-surface-container"
-    aria-labelledby="activity-heading"
+    aria-labelledby="market-heading"
   >
     <div class="max-w-2xl mx-auto">
-      <h2
-        id="activity-heading"
-        class="text-2xl font-bold text-on-surface mb-6 text-center"
-      >
-        {{ $t('viral.activityFeed') }}
-      </h2>
+      <div class="flex items-center justify-between mb-6">
+        <h2
+          id="market-heading"
+          class="text-2xl font-bold text-on-surface"
+        >
+          {{ $t('market.title') }}
+        </h2>
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full text-sm font-medium bg-surface-variant text-on-surface-variant hover:bg-surface-container-high transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          :disabled="isLoading"
+          @click="load"
+        >
+          {{ $t('market.refresh') }}
+        </button>
+      </div>
 
       <!-- Screen reader live region -->
       <div
@@ -70,7 +108,13 @@ function timeAgo(date: Date): string {
         aria-atomic="true"
         class="sr-only"
       >
-        {{ liveMessage }}
+        {{ isLoading
+          ? t('common.loading')
+          : isUnavailable
+            ? t('market.unavailable')
+            : movers.length > 0
+              ? t('market.title')
+              : t('market.empty') }}
       </div>
 
       <!-- Loading state -->
@@ -93,28 +137,66 @@ function timeAgo(date: Date): string {
         </div>
       </div>
 
-      <!-- Activity list -->
+      <!-- Unavailable state (truthful — no fabricated fallback) -->
+      <div
+        v-else-if="isUnavailable"
+        class="text-center py-10 bg-surface rounded-xl"
+        role="status"
+      >
+        <p class="text-on-surface-variant">{{ $t('market.unavailable') }}</p>
+      </div>
+
+      <!-- Empty state (real data fetched, no significant movers) -->
+      <div
+        v-else-if="movers.length === 0"
+        class="text-center py-10 bg-surface rounded-xl"
+        role="status"
+      >
+        <p class="text-on-surface-variant">{{ $t('market.empty') }}</p>
+      </div>
+
+      <!-- Mover list -->
       <ul
         v-else
         class="space-y-3"
         role="list"
-        :aria-label="$t('viral.activityFeed')"
+        :aria-label="$t('market.title')"
       >
         <li
-          v-for="activity in activities"
-          :key="activity.id"
-          class="flex items-start gap-3 bg-surface rounded-xl p-4"
+          v-for="mover in movers"
+          :key="mover.asset_id"
+          class="flex items-center justify-between gap-4 bg-surface rounded-xl p-4"
         >
-          <div
-            class="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2"
-            aria-hidden="true"
-          />
-          <div class="flex-1">
-            <p class="text-sm text-on-surface">{{ activity.message }}</p>
-            <p class="text-xs text-on-surface-variant mt-1">{{ timeAgo(activity.timestamp) }}</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="flex-shrink-0 w-9 h-9 rounded-full bg-primary-container flex items-center justify-center text-sm font-bold text-on-primary-container uppercase"
+              aria-hidden="true"
+            >
+              {{ mover.symbol.slice(0, 3) }}
+            </div>
+            <div>
+              <p class="font-semibold text-on-surface uppercase">{{ mover.symbol }}</p>
+              <p class="text-xs text-on-surface-variant">${{ formatPrice(mover.price_usd) }}</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p
+              class="font-semibold"
+              :class="moverClass(mover.change_24h_pct)"
+            >
+              {{ formatPct(mover.change_24h_pct) }}
+            </p>
+            <p class="text-xs text-on-surface-variant">{{ $t('market.change24h') }}</p>
           </div>
         </li>
       </ul>
+
+      <p
+        v-if="isStale && movers.length > 0"
+        class="text-xs text-on-surface-variant text-center mt-4"
+      >
+        {{ $t('market.stale') }}
+      </p>
     </div>
   </section>
 </template>

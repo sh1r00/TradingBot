@@ -3,57 +3,93 @@ import { ref, computed } from 'vue'
 
 const STORAGE_KEY = 'resource-links'
 
-const SEED_RESOURCES: Omit<ResourceLink, 'id' | 'createdAt' | 'updatedAt'>[] = [
+export interface ResourceLink {
+  id: string
+  /**
+   * i18n slug. Present on the 6 seeded resources so their title / description /
+   * category render via `$t('resources.items.<key>.*')` (en/es/am lockstep).
+   * Absent on admin-created links, which store literal text instead.
+   */
+  key?: string
+  /** Literal title — only used for admin-created links (seeded links use `key`). */
+  title?: string
+  /** Literal description — only used for admin-created links (seeded links use `key`). */
+  description?: string
+  /** Stable grouping value. Seeded links use the English category label; admin links use free text. */
+  category: string
+  /** Official, non-tracking URL (the working href). */
+  url: string
+  /**
+   * Affiliate / tracking link.
+   * PENDING: empty until the owner pastes their affiliate URL. The public `url`
+   * remains the official, non-tracking href. Never invent affiliate IDs.
+   */
+  trackingUrl?: string
+  thumbnail: string | null
+  displayOrder: number
+  isPublished: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+/**
+ * The 6 seeded money-making resources.
+ * title / description are NOT stored here — they live in i18n
+ * (`resources.items.<key>.*`) and render via $t(), keeping en/es/am in lockstep.
+ * `url` is the official, non-tracking URL; `trackingUrl` is intentionally empty
+ * until the owner supplies their affiliate tracking links.
+ */
+const SEED_RESOURCES: Omit<ResourceLink, 'id' | 'title' | 'description' | 'createdAt' | 'updatedAt'>[] = [
   {
-    title: 'Scrambly — Get Paid to Play Games',
-    description: 'Earn cash and gift cards by playing games, testing apps, and completing quick offers. One of the easiest entry points into making money online in your spare time.',
+    key: 'scrambly',
     category: 'Gaming',
     url: 'https://scrambly.io',
+    trackingUrl: '', // PENDING: paste affiliate URL when available
     thumbnail: null,
     displayOrder: 0,
     isPublished: true,
   },
   {
-    title: 'Webull — Commission-Free Investing',
-    description: 'Trade stocks, ETFs, and options with zero commissions and fractional shares. A beginner-friendly way to start building long-term wealth.',
+    key: 'webull',
     category: 'Investing',
     url: 'https://www.webull.com',
+    trackingUrl: '', // PENDING: paste affiliate URL when available
     thumbnail: null,
     displayOrder: 1,
     isPublished: true,
   },
   {
-    title: 'Mercor — Work in the AI Field',
-    description: 'Get paid to train and evaluate AI models. Flexible, remote, technical-adjacent work that does not require a CS degree to start.',
+    key: 'mercor',
     category: 'AI Work',
     url: 'https://mercor.com',
+    trackingUrl: '', // PENDING: paste affiliate URL when available
     thumbnail: null,
     displayOrder: 2,
     isPublished: true,
   },
   {
-    title: 'Upwork & Fiverr — Freelancing',
-    description: 'Sell your skills on the world\'s largest freelance marketplaces. Writing, design, programming, and more — set your own rates and find clients worldwide.',
+    key: 'upwork-fiverr',
     category: 'Freelancing',
     url: 'https://www.upwork.com',
+    trackingUrl: '', // PENDING: paste affiliate URL when available
     thumbnail: null,
     displayOrder: 3,
     isPublished: true,
   },
   {
-    title: 'Amazon Associates — Affiliate Marketing',
-    description: 'Earn commissions by promoting products you already use and love. Amazon\'s affiliate program is one of the lowest-friction ways to start earning online.',
+    key: 'amazon-associates',
     category: 'Affiliate Marketing',
     url: 'https://affiliate-program.amazon.com',
+    trackingUrl: '', // PENDING: paste affiliate URL when available
     thumbnail: null,
     displayOrder: 4,
     isPublished: true,
   },
   {
-    title: 'Depop — Sell & Resell Items',
-    description: 'Turn clothes, shoes, and collectibles you no longer use into cash. Reselling on Depop is a proven side income with zero upfront inventory cost.',
+    key: 'depop',
     category: 'Reselling',
     url: 'https://www.depop.com',
+    trackingUrl: '', // PENDING: paste affiliate URL when available
     thumbnail: null,
     displayOrder: 5,
     isPublished: true,
@@ -68,19 +104,6 @@ function seedResources(): ResourceLink[] {
     createdAt: now,
     updatedAt: now,
   }))
-}
-
-export interface ResourceLink {
-  id: string
-  title: string
-  description: string
-  category: string
-  url: string
-  thumbnail: string | null
-  displayOrder: number
-  isPublished: boolean
-  createdAt: string
-  updatedAt: string
 }
 
 /**
@@ -126,7 +149,7 @@ export const useResourcesStore = defineStore('resources', () => {
   }
 
   function create(data: Omit<ResourceLink, 'id' | 'createdAt' | 'updatedAt'>): void {
-    // Validate required fields
+    // Validate required fields (admin-created links store literal text)
     if (!data.title || data.title.length < 3 || data.title.length > 100) {
       throw new Error('Title must be between 3 and 100 characters')
     }
