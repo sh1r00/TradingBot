@@ -36,7 +36,9 @@ describe('OHeroSection', () => {
       },
     })
 
-    expect(wrapper.get('#hero-title').text()).toBe('Your Path to Financial Freedom Starts Here')
+    // Title is word-split (kinetic type) into `.hero-word` spans — join them back
+    const words = wrapper.get('#hero-title').findAll('.hero-word').map((w) => w.text())
+    expect(words.join(' ')).toBe('Your Path to Financial Freedom Starts Here')
   })
 
   it('renders the hero subtitle from i18n', () => {

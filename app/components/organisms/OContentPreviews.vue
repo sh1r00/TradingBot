@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { contentArticles } from '~/data/contentArticles'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { getContentArticles } from '~/data/contentArticles'
 import type { ContentArticle } from '~/data/contentArticles'
 
-const items: ContentArticle[] = contentArticles
+const { locale } = useI18n()
+const items = computed<ContentArticle[]>(() => getContentArticles(locale.value))
 
 const expandedId = ref<string | null>(null)
 

@@ -5,16 +5,14 @@ const STORAGE_KEY = 'engagement'
 
 /**
  * Engagement store.
- * Manages gamification-related state including badges,
- * daily check-ins, visit tracking, and user preferences.
+ * Tracks visit history, install-prompt dismissal, and locale preference.
  *
- * Requirements: 8.2, 9.2, 9.3
+ * Note: gamification (daily check-ins, badges, share-counts) was removed —
+ * it offered no real value to the user. Visit tracking remains so the
+ * notification bar can show an honest "welcome back" greeting.
  */
 export const useEngagementStore = defineStore('engagement', () => {
-  const badges = ref<string[]>([])
   const lastVisit = ref<string | null>(null)
-  const dailyCheckIns = ref<number>(0)
-  const sharesCount = ref<number>(0)
   const installPromptDismissed = ref<boolean>(false)
   const preferredLocale = ref<'en' | 'es' | 'am'>('en')
 
@@ -24,10 +22,7 @@ export const useEngagementStore = defineStore('engagement', () => {
     if (stored) {
       try {
         const parsed = JSON.parse(stored)
-        badges.value = parsed.badges || []
         lastVisit.value = parsed.lastVisit || null
-        dailyCheckIns.value = parsed.dailyCheckIns || 0
-        sharesCount.value = parsed.sharesCount || 0
         installPromptDismissed.value = parsed.installPromptDismissed || false
         preferredLocale.value = parsed.preferredLocale || 'en'
       } catch {
@@ -38,10 +33,7 @@ export const useEngagementStore = defineStore('engagement', () => {
 
   function persist(): void {
     const data = {
-      badges: badges.value,
       lastVisit: lastVisit.value,
-      dailyCheckIns: dailyCheckIns.value,
-      sharesCount: sharesCount.value,
       installPromptDismissed: installPromptDismissed.value,
       preferredLocale: preferredLocale.value,
     }
@@ -51,28 +43,6 @@ export const useEngagementStore = defineStore('engagement', () => {
 
   function markVisit(): void {
     lastVisit.value = new Date().toISOString()
-    persist()
-  }
-
-  function incrementDailyCheckIn(): void {
-    dailyCheckIns.value += 1
-    persist()
-  }
-
-  function incrementShares(): void {
-    sharesCount.value += 1
-    persist()
-  }
-
-  function addBadge(badgeId: string): void {
-    if (!badges.value.includes(badgeId)) {
-      badges.value.push(badgeId)
-      persist()
-    }
-  }
-
-  function removeBadge(badgeId: string): void {
-    badges.value = badges.value.filter((id) => id !== badgeId)
     persist()
   }
 
@@ -87,19 +57,12 @@ export const useEngagementStore = defineStore('engagement', () => {
   }
 
   return {
-    badges,
     lastVisit,
-    dailyCheckIns,
-    sharesCount,
     installPromptDismissed,
     preferredLocale,
     initialize,
     persist,
     markVisit,
-    incrementDailyCheckIn,
-    incrementShares,
-    addBadge,
-    removeBadge,
     setInstallPromptDismissed,
     setPreferredLocale,
   }

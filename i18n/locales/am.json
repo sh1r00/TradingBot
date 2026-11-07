@@ -29,9 +29,7 @@
   },
   "viral": {
     "leaderboardTitle": "በጣም የተጋሩ መረጃዎች",
-    "achievementEarned": "ስኬት ተከፍቷል!",
     "activityFeed": "የቀጥታ እንቅስቃሴ",
-    "dailyCheckIn": "ዕለታዊ ምዝገባ",
     "incomeCalculator": "የገቢ ማስያ",
     "shareSuccess": "ስላጋሩ እናመሰግናለን!",
     "copySuccess": "ወደ ክሊፕቦርድ ተቀድቷል!"
@@ -64,16 +62,6 @@
       "general": "አጠቃላይ"
     }
   },
-  "badge": {
-    "gatedTitle": "የእርስዎ ስኬቶች",
-    "firstShare": "የመጀመሪያ መጋራት",
-    "fiveShares": "5 መጋራቶች",
-    "tenShares": "10 መጋራቶች",
-    "earlyAccess": "ቀድሞ መድረሻ",
-    "sevenDayStreak": "የ7 ቀን ተከታታይነት",
-    "twentyOneDayStreak": "የ21 ቀን ተከታታይነት",
-    "earnedCount": "{count} ተገኝቷል"
-  },
   "notification": {
     "morning": "እንደምን አደሩ! ቀንዎን በአዳዲስ እድሎች ይጀምሩ።",
     "evening": "እንደምን አመሹ! የዛሬዎቹን ምርጥ መረጃዎች ይገምግሙ።",
@@ -86,22 +74,6 @@
     "activityHours": "ከ{count} ሰዓታት በፊት",
     "activityDay": "ከ{count} ቀን በፊት",
     "activityDays": "ከ{count} ቀናት በፊት"
-  },
-  "exclusive": {
-    "title": "ብቸኛ የአባላት አካባቢ",
-    "locked": "ልዩ ይዘትን ለመክፈት ዕለታዊ የምዝገባ ተከታታይነት ያጠናቅቁ።",
-    "unlock": "ተከታታይነትዎን ይጀምሩ",
-    "unlocked": "ልዩ ይዘት ተከፍቷል",
-    "content": "ወደ ብቸኛ የአባላት አካባቢ እንኳን ደህና መጡ።",
-    "shareToUnlock": "ፕሪሚየም ይዘትን ለመክፈት ለጓደኞችዎ ያጋሩ",
-    "unlockedMessage": "ልዩ ይዘትን ከፍተዋል!"
-  },
-  "checkin": {
-    "checkInNow": "አሁን ይመዝገቡ",
-    "days": "ቀናት",
-    "alreadyCheckedIn": "ዛሬ አስቀድመው ተመዝግበዋል!",
-    "streakLabel": "የ{count} ቀን ተከታታይነት",
-    "streakProgress": "የተከታታይነት እድገት"
   },
   "calculator": {
     "subtitle": "ምን ያህል ማግኘት እንደሚችሉ ይመልከቱ",

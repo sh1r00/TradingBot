@@ -4,11 +4,13 @@ import { onMounted, onUnmounted, nextTick, computed } from 'vue'
 import { useDarkModeStore } from '~/stores/darkMode'
 import { usePwaInstallStore } from '~/stores/pwaInstall'
 import { useAuthStore } from '~/stores/auth'
+import { useEngagementStore } from '~/stores/engagement'
 
 const route = useRoute()
 const darkModeStore = useDarkModeStore()
 const pwaInstallStore = usePwaInstallStore()
 const authStore = useAuthStore()
+const engagementStore = useEngagementStore()
 
 // Reactively track dark mode for template class binding
 const isDark = computed(() => darkModeStore.isDark)
@@ -25,6 +27,8 @@ onMounted(() => {
   darkModeStore.initialize()
   pwaInstallStore.initialize()
   authStore.initialize()
+  engagementStore.initialize()
+  engagementStore.markVisit()
 })
 
 // Focus management on route change

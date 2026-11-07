@@ -29,9 +29,7 @@
   },
   "viral": {
     "leaderboardTitle": "Top Shared Resources",
-    "achievementEarned": "Achievement Unlocked!",
     "activityFeed": "Live Activity Feed",
-    "dailyCheckIn": "Daily Check-In",
     "incomeCalculator": "Income Calculator",
     "shareSuccess": "Thanks for sharing!",
     "copySuccess": "Copied to clipboard!"
@@ -64,16 +62,6 @@
       "general": "General"
     }
   },
-  "badge": {
-    "gatedTitle": "Your Achievements",
-    "firstShare": "First Share",
-    "fiveShares": "5 Shares",
-    "tenShares": "10 Shares",
-    "earlyAccess": "Early Access",
-    "sevenDayStreak": "7-Day Streak",
-    "twentyOneDayStreak": "21-Day Streak",
-    "earnedCount": "{count} earned"
-  },
   "notification": {
     "morning": "Good morning! Start your day with new opportunities.",
     "evening": "Good evening! Review today's top resources.",
@@ -86,22 +74,6 @@
     "activityHours": "{count} hours ago",
     "activityDay": "{count} day ago",
     "activityDays": "{count} days ago"
-  },
-  "exclusive": {
-    "title": "Exclusive Members Area",
-    "locked": "Complete a daily check-in streak to unlock exclusive content.",
-    "unlock": "Start Your Streak",
-    "unlocked": "Exclusive Content Unlocked",
-    "content": "Welcome to the exclusive members area.",
-    "shareToUnlock": "Share with friends to unlock premium content",
-    "unlockedMessage": "You have unlocked exclusive content!"
-  },
-  "checkin": {
-    "checkInNow": "Check In Now",
-    "days": "days",
-    "alreadyCheckedIn": "You've already checked in today!",
-    "streakLabel": "{count} day streak",
-    "streakProgress": "Streak progress"
   },
   "calculator": {
     "subtitle": "See how much you could earn",

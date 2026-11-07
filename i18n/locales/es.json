@@ -29,9 +29,7 @@
   },
   "viral": {
     "leaderboardTitle": "Recursos Más Compartidos",
-    "achievementEarned": "¡Logro Desbloqueado!",
     "activityFeed": "Actividad en Vivo",
-    "dailyCheckIn": "Registro Diario",
     "incomeCalculator": "Calculadora de Ingresos",
     "shareSuccess": "¡Gracias por compartir!",
     "copySuccess": "¡Copiado al portapapeles!"
@@ -64,16 +62,6 @@
       "general": "General"
     }
   },
-  "badge": {
-    "gatedTitle": "Tus Logros",
-    "firstShare": "Primera Compartición",
-    "fiveShares": "5 Comparticiones",
-    "tenShares": "10 Comparticiones",
-    "earlyAccess": "Acceso Anticipado",
-    "sevenDayStreak": "Racha de 7 Días",
-    "twentyOneDayStreak": "Racha de 21 Días",
-    "earnedCount": "{count} ganados"
-  },
   "notification": {
     "morning": "¡Buenos días! Comienza tu día con nuevas oportunidades.",
     "evening": "¡Buenas tardes! Revisa los mejores recursos de hoy.",
@@ -86,20 +74,6 @@
     "activityHours": "hace {count} horas",
     "activityDay": "hace {count} día",
     "activityDays": "hace {count} días"
-  },
-  "exclusive": {
-    "title": "Área de Miembros Exclusivos",
-    "locked": "Completa una racha de registro diario para desbloquear contenido exclusivo.",
-    "unlock": "Comienza tu Racha",
-    "unlocked": "Contenido Exclusivo Desbloqueado",
-    "content": "Bienvenido al área de miembros exclusivos.",
-    "shareToUnlock": "Comparte con amigos para desbloquear contenido premium",
-    "unlockedMessage": "¡Has desbloqueado contenido exclusivo!"
-  },
-  "checkin": {
-    "checkInNow": "Registrarse Ahora",
-    "days": "días",
-    "alreadyCheckedIn": "¡Ya te has registrado hoy!"
   },
   "calculator": {
     "subtitle": "Descubre cuánto podrías ganar",

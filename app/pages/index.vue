@@ -77,9 +77,6 @@ useSeoMeta({
     <!-- 5. Live Activity -->
     <OLiveActivityFeed v-reveal />
 
-    <!-- 6. Achievements -->
-    <OAchievementBadge v-reveal />
-
     <!-- 7. Pain Points -->
     <OPainPoint v-reveal />
 
@@ -87,12 +84,6 @@ useSeoMeta({
     <div id="income-calculator" v-reveal>
       <OIncomeCalculator />
     </div>
-
-    <!-- 9. Daily Check-In -->
-    <ODailyCheckIn v-reveal />
-
-    <!-- 10. Exclusive Access -->
-    <OExclusiveAccess v-reveal />
 
     <!-- 11. Free Toolkit -->
     <OFreeToolkit v-reveal />
