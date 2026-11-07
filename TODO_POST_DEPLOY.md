@@ -2,6 +2,17 @@
 
 Deferred work + fake data that must be replaced with real content before this ships.
 
+## 🔑 Blocked — needs keys / credentials (owner to supply)
+
+- **Live market-data backend** — the filter (`app/utils/marketFilter.ts`) + CoinGecko route
+  (`server/api/market/activity.get.ts`) + tests are DONE. Wiring them end-to-end needs:
+  - A **Supabase project URL + anon/service key** (dedicated schema/project for TradingBot).
+  - A scheduled host decision: **Netlify Scheduled Functions** (TradingBot is already on
+    Netlify) **or** Supabase `pg_cron`.
+  - No SSR switch required — the feed read is a direct browser → Supabase / Netlify Function.
+- **Affiliate links** — the 6 resources use official (non-tracking) URLs. When affiliate
+  accounts are set up, paste the tracking links (see "Affiliate links" below).
+
 ## Spoofed / placeholder data (do NOT go live with these)
 
 ### Live activity feed — 100% fabricated
