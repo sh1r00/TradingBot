@@ -11,11 +11,6 @@ function scrollToCalculator() {
   if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
 
-function scrollToShare() {
-  const el = document.getElementById('share-section')
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
-}
-
 useHead({
   script: [
     {
@@ -59,53 +54,46 @@ useSeoMeta({
 
 <template>
   <div class="space-y-0">
-    <!-- 1. Hero -->
+    <!-- 1. Hero (always visible) -->
     <OHeroSection
       @primary-cta="goToResources"
       @secondary-cta="scrollToCalculator"
     />
 
-    <!-- Marquee (decorative) -->
-    <MMarquee />
+    <!-- 2. Income Calculator (high value — moved up, right after hero) -->
+    <OIncomeCalculator v-reveal />
 
-    <!-- 2. Notification -->
-    <ONotificationBar v-reveal />
-
-    <!-- 4. Leaderboard -->
+    <!-- 3. Leaderboard / top resources (high value) -->
     <OLeaderboard v-reveal />
 
-    <!-- 5. Live Activity -->
-    <OLiveActivityFeed v-reveal />
+    <!-- 4+. Progressive disclosure — lower-value sections collapsed behind "show more". -->
+    <section class="px-4 py-8" aria-labelledby="more-sections-summary">
+      <div class="max-w-3xl mx-auto">
+        <details class="group rounded-2xl overflow-hidden bg-surface-container">
+          <summary
+            id="more-sections-summary"
+            class="flex items-center justify-between gap-4 cursor-pointer select-none list-none px-6 py-5 font-semibold text-on-surface hover:bg-surface-variant transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset min-h-[44px] [&::-webkit-details-marker]:hidden"
+          >
+            <span>{{ $t('home.showMore') }}</span>
+            <AIcon
+              name="expand_more"
+              class="text-on-surface-variant transition-transform duration-200 group-open:rotate-180"
+              aria-hidden="true"
+            />
+          </summary>
 
-    <!-- 7. Pain Points -->
-    <OPainPoint v-reveal />
-
-    <!-- 8. Income Calculator -->
-    <div id="income-calculator" v-reveal>
-      <OIncomeCalculator />
-    </div>
-
-    <!-- 11. Free Toolkit -->
-    <OFreeToolkit v-reveal />
-
-    <!-- 12. Content Previews -->
-    <OContentPreviews v-reveal />
-
-    <!-- 13. Lead Capture -->
-    <OLeadCapture v-reveal />
-
-    <!-- 14. Case Study -->
-    <OCaseStudy v-reveal />
-
-    <!-- 15. Success Story -->
-    <OSuccessStory v-reveal />
-
-    <!-- 16. Founder Story -->
-    <OFounderStory v-reveal />
-
-    <!-- 17. Share Section -->
-    <div id="share-section" v-reveal>
-      <OShareSection />
-    </div>
+          <div class="space-y-0">
+            <!-- Lazy-mount below-the-fold sections (only fetched when the group is expanded). -->
+            <LazyONotificationBar />
+            <LazyOLiveActivityFeed />
+            <LazyOPainPoint />
+            <LazyOFreeToolkit />
+            <LazyOContentPreviews />
+            <LazyOLeadCapture />
+            <LazyOShareSection />
+          </div>
+        </details>
+      </div>
+    </section>
   </div>
 </template>

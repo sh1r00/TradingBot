@@ -25,11 +25,13 @@ function handleForgotPassword() {
   }
 
   isSubmitting.value = true
-  const token = auth.requestPasswordReset(email.value.trim())
+  const result = auth.requestPasswordReset(email.value.trim())
   isSubmitting.value = false
 
-  if (token) {
+  if (result.ok) {
     sent.value = true
+  } else if (result.reason === 'throttled') {
+    error.value = 'Too many reset requests. Please wait before trying again.'
   } else {
     error.value = 'No account found with that email address'
   }

@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useResourcesStore, type ResourceLink } from '~/stores/resources'
+import { useBookmarksStore } from '~/stores/bookmarks'
 
 const { t } = useI18n()
 const resourcesStore = useResourcesStore()
+const bookmarksStore = useBookmarksStore()
+
+const showSavedOnly = ref(false)
 
 /**
  * Resolve a resource's display text. Seeded resources (`key`) render from i18n
@@ -22,26 +26,35 @@ function displayCategory(link: ResourceLink): string {
   return link.key ? t(`resources.items.${link.key}.category`) : (link.category || t('resources.categories.general'))
 }
 
+// Links to render, narrowed to bookmarked items when the "saved" filter is active.
+const visibleLinks = computed(() => {
+  const links = resourcesStore.links || []
+  if (!showSavedOnly.value) return links
+  return links.filter((link) => bookmarksStore.isBookmarked(link.id))
+})
+
+const hasBookmarks = computed(() => bookmarksStore.ids.length > 0)
+
 // Group published resource links by category
 const groupedResources = computed(() => {
-  const groups = new Map<string, typeof resourcesStore.links>()
-  
-  for (const link of resourcesStore.links || []) {
+  const groups = new Map<string, ResourceLink[]>()
+
+  for (const link of visibleLinks.value) {
     // Only show published links
     if (!link.isPublished) continue
-    
+
     const category = displayCategory(link)
     if (!groups.has(category)) {
       groups.set(category, [])
     }
     groups.get(category)!.push(link)
   }
-  
+
   // Sort links within each category by displayOrder
   for (const [category, links] of groups.entries()) {
     links.sort((a, b) => a.displayOrder - b.displayOrder)
   }
-  
+
   return groups
 })
 
@@ -59,6 +72,7 @@ const getCategoryEmptyMessage = (category: string): string => {
 }
 
 onMounted(() => {
+  bookmarksStore.load()
   resourcesStore.fetchAll()
 })
 </script>
@@ -69,12 +83,29 @@ onMounted(() => {
     aria-labelledby="resources-heading"
   >
     <div class="max-w-7xl mx-auto">
-      <h1
-        id="resources-heading"
-        class="text-3xl font-bold text-on-surface mb-8 text-center"
-      >
-        {{ t('resources.title') }}
-      </h1>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+        <h1
+          id="resources-heading"
+          class="text-3xl font-bold text-on-surface text-center sm:text-left"
+        >
+          {{ t('resources.title') }}
+        </h1>
+
+        <!-- Saved / all filter -->
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full text-sm font-medium bg-surface-variant text-on-surface-variant hover:bg-surface-container-high transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          :aria-pressed="showSavedOnly"
+          @click="showSavedOnly = !showSavedOnly"
+        >
+          <AIcon
+            :name="showSavedOnly ? 'favorite' : 'favorite_border'"
+            size="sm"
+            aria-hidden="true"
+          />
+          {{ showSavedOnly ? t('resources.showAll') : t('resources.savedOnly') }}
+        </button>
+      </div>
 
       <!-- Loading state with aria-busy -->
       <div
@@ -114,6 +145,22 @@ onMounted(() => {
         >
           {{ t('common.retry') }}
         </AButton>
+      </div>
+
+      <!-- Saved filter active, but nothing bookmarked -->
+      <div
+        v-else-if="showSavedOnly && !hasBookmarks"
+        class="text-center py-16 px-4"
+      >
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-variant mb-4">
+          <AIcon name="favorite_border" class="text-on-surface-variant" aria-hidden="true" />
+        </div>
+        <h2 class="text-xl font-semibold text-on-surface mb-2">
+          {{ t('resources.noSavedTitle') }}
+        </h2>
+        <p class="text-on-surface-variant max-w-md mx-auto">
+          {{ t('resources.noSavedDescription') }}
+        </p>
       </div>
 
       <!-- No resources found -->
@@ -170,6 +217,7 @@ onMounted(() => {
               :key="link.id"
             >
               <MResourceCard
+                :resource-id="link.id"
                 :title="displayTitle(link)"
                 :description="displayDescription(link)"
                 :category="category"

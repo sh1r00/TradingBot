@@ -42,6 +42,11 @@
   --color-error-container: var(--md-sys-color-error-container);
   --color-on-error-container: var(--md-sys-color-on-error-container);
 
+  /* Market feed semantic colors (green = up, red = down). Not part of the M3
+     seed palette — defined here for the live market feed's up/down coloring. */
+  --color-market-up: #16a34a;
+  --color-market-down: #dc2626;
+
   --color-surface: var(--md-sys-color-surface);
   --color-on-surface: var(--md-sys-color-on-surface);
   --color-surface-variant: var(--md-sys-color-surface-variant);
@@ -67,6 +72,12 @@
     font-family: var(--font-sans);
     background-color: var(--md-sys-color-surface);
     color: var(--md-sys-color-on-surface);
+  }
+
+  /* Lighter market up/down colors for dark mode contrast. */
+  .dark {
+    --color-market-up: #4ade80;
+    --color-market-down: #f87171;
   }
 
   /* Focus-visible indicator for accessibility (WCAG 2.2 AA) */

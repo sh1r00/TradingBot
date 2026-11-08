@@ -47,9 +47,11 @@ function handleSignup() {
   const result = auth.signup(email.value.trim(), password.value, name.value.trim())
   isSubmitting.value = false
 
-  if (result) {
+  if (result.ok) {
     // Auto-login successful, redirect to home
     router.push(localePath('/'))
+  } else if (result.reason === 'throttled') {
+    error.value = 'Too many sign-up attempts. Please wait a while and try again.'
   } else {
     error.value = 'An account with this email already exists'
   }

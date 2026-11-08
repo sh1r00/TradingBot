@@ -40,7 +40,8 @@
     "empty": "No hay movimientos significativos del mercado en este momento.",
     "unavailable": "Los datos del mercado en vivo no están disponibles ahora. Vuelve pronto.",
     "stale": "Los datos pueden estar retrasados.",
-    "change24h": "24h"
+    "change24h": "24h",
+    "live": "En vivo"
   },
   "admin": {
     "title": "Panel de Administración",
@@ -67,6 +68,12 @@
     "noResourcesTitle": "No Hay Recursos Disponibles",
     "noResourcesDescription": "Vuelve pronto para ver recursos seleccionados.",
     "emptyCategory": "Aún no hay recursos de {category}.",
+    "saveBookmark": "Guardar recurso",
+    "removeBookmark": "Quitar marcador",
+    "savedOnly": "Solo guardados",
+    "showAll": "Mostrar todos",
+    "noSavedTitle": "Aún no hay recursos guardados",
+    "noSavedDescription": "Marca recursos para encontrarlos rápido aquí después.",
     "categories": {
       "general": "General"
     },
@@ -219,7 +226,8 @@
     "fileTooLarge": "El archivo debe ser menor de 2MB"
   },
   "home": {
-    "title": "Money Conversion SPA"
+    "title": "Money Conversion SPA",
+    "showMore": "Explorar más herramientas y recursos"
   },
   "primaryCta": "Comenzar",
   "secondaryCta": "Más Información",

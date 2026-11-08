@@ -40,7 +40,8 @@
     "empty": "No significant market movement right now.",
     "unavailable": "Live market data is unavailable right now. Check back shortly.",
     "stale": "Data may be delayed.",
-    "change24h": "24h"
+    "change24h": "24h",
+    "live": "Live"
   },
   "admin": {
     "title": "Admin Panel",
@@ -67,6 +68,12 @@
     "noResourcesTitle": "No Resources Available Yet",
     "noResourcesDescription": "Check back soon for curated money-making resources.",
     "emptyCategory": "No {category} resources yet.",
+    "saveBookmark": "Save resource",
+    "removeBookmark": "Remove bookmark",
+    "savedOnly": "Saved only",
+    "showAll": "Show all",
+    "noSavedTitle": "No saved resources yet",
+    "noSavedDescription": "Bookmark resources to find them quickly here later.",
     "categories": {
       "general": "General"
     },
@@ -219,7 +226,8 @@
     "fileTooLarge": "File must be under 2MB"
   },
   "home": {
-    "title": "Money Conversion SPA"
+    "title": "Money Conversion SPA",
+    "showMore": "Show more tools & resources"
   },
   "primaryCta": "Get Started",
   "secondaryCta": "Learn More",

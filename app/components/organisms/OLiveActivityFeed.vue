@@ -7,10 +7,10 @@
  * market filter (`app/utils/marketFilter.ts`) to surface only "significant movers"
  * (|24h change| >= 1%, stablecoins excluded).
  *
- * The previous fake feed (`SEED_ACTIVITIES` / `SIMULATED_MESSAGES` + a `setInterval`
- * that invented a new event every 8–15s) has been removed entirely. Nothing here
- * is simulated: if the API is unreachable (e.g. a static host with no server), we
- * show a truthful "unavailable" state instead of inventing movement.
+ * On a static host (e.g. the Netlify SSG deploy) the server route does not run,
+ * so the request 404s — in that case we hide this section entirely instead of
+ * showing an empty "unavailable" box. Only a *transient* upstream outage on an
+ * SSR-capable runtime surfaces the honest "unavailable"/stale message.
  */
 
 interface MarketMover {
@@ -36,6 +36,8 @@ const movers = ref<MarketMover[]>([])
 const isLoading = ref(true)
 const isUnavailable = ref(false)
 const isStale = ref(false)
+// Static host (no server route) → render nothing, not an empty box.
+const hideSection = ref(false)
 let refreshTimer: ReturnType<typeof setInterval> | null = null
 
 async function load(): Promise<void> {
@@ -43,11 +45,15 @@ async function load(): Promise<void> {
     const data = await $fetch<MarketActivityResponse>('/api/market/activity')
     movers.value = Array.isArray(data?.movers) ? data.movers : []
     isStale.value = Boolean(data?.stale)
-    isUnavailable.value = false
+    // A stale response with no data = transient upstream outage (honest text).
+    isUnavailable.value = Boolean(data?.stale) && movers.value.length === 0
+    hideSection.value = false
   } catch {
-    // Fetch failed (e.g. static host with no API route) — never fabricate.
+    // Fetch failed (e.g. static host with no API route) — hide the section.
     movers.value = []
-    isUnavailable.value = true
+    isStale.value = false
+    isUnavailable.value = false
+    hideSection.value = true
   } finally {
     isLoading.value = false
   }
@@ -75,23 +81,36 @@ function formatPct(v: number): string {
 }
 
 function moverClass(v: number): string {
-  return v >= 0 ? 'text-success' : 'text-error'
+  return v >= 0 ? 'text-market-up' : 'text-market-down'
 }
 </script>
 
 <template>
   <section
+    v-if="!hideSection"
     class="py-12 px-4 bg-surface-container"
     aria-labelledby="market-heading"
   >
     <div class="max-w-2xl mx-auto">
       <div class="flex items-center justify-between mb-6">
-        <h2
-          id="market-heading"
-          class="text-2xl font-bold text-on-surface"
-        >
-          {{ $t('market.title') }}
-        </h2>
+        <div class="flex items-center gap-3">
+          <h2
+            id="market-heading"
+            class="text-2xl font-bold text-on-surface"
+          >
+            {{ $t('market.title') }}
+          </h2>
+          <!-- Live indicator (fresh data only) -->
+          <span
+            v-if="!isStale && !isLoading"
+            class="inline-flex items-center gap-1.5 text-xs font-medium text-market-up"
+            role="img"
+            :aria-label="$t('market.live')"
+          >
+            <span class="live-dot" aria-hidden="true" />
+            {{ $t('market.live') }}
+          </span>
+        </div>
         <button
           type="button"
           class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-full text-sm font-medium bg-surface-variant text-on-surface-variant hover:bg-surface-container-high transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -137,7 +156,7 @@ function moverClass(v: number): string {
         </div>
       </div>
 
-      <!-- Unavailable state (truthful — no fabricated fallback) -->
+      <!-- Unavailable state (transient upstream outage — honest, no fabricated fallback) -->
       <div
         v-else-if="isUnavailable"
         class="text-center py-10 bg-surface rounded-xl"
@@ -181,9 +200,14 @@ function moverClass(v: number): string {
           </div>
           <div class="text-right">
             <p
-              class="font-semibold"
+              class="font-semibold inline-flex items-center justify-end gap-1"
               :class="moverClass(mover.change_24h_pct)"
             >
+              <AIcon
+                :name="mover.change_24h_pct >= 0 ? 'trending_up' : 'trending_down'"
+                size="xs"
+                aria-hidden="true"
+              />
               {{ formatPct(mover.change_24h_pct) }}
             </p>
             <p class="text-xs text-on-surface-variant">{{ $t('market.change24h') }}</p>
@@ -200,3 +224,28 @@ function moverClass(v: number): string {
     </div>
   </section>
 </template>
+
+<style scoped>
+.live-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: currentColor;
+  animation: live-dot-pulse 1.6s ease-in-out infinite;
+}
+@keyframes live-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+}
+</style>

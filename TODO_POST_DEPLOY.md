@@ -13,6 +13,14 @@ literal placeholder is flagged here.
   - A **Supabase project URL + anon/service key** (dedicated schema/project for TradingBot).
   - A scheduled host decision: **Netlify Scheduled Functions** or Supabase `pg_cron`.
   - No SSR switch required — the feed read is a direct browser → Supabase / Netlify Function.
+
+- **Brevo email-drip wiring** — `OLeadCapture.vue` (email capture) and `OFreeToolkit.vue`
+  (gated "free tools" CTA) are currently **decorative**: `OLeadCapture.handleSubmit` only
+  simulates a POST and clears the field — nothing is persisted or delivered. Wire both to
+  **Brevo** (transactional email + a contact list) so captured emails land in a list and
+  trigger the free-toolkit drip. Needs: a **Brevo API key + contact-list ID**. Until then,
+  these forms silently discard every submission.
+
 - **Affiliate links** — the 6 resources use official (non-tracking) URLs with an empty
   `trackingUrl` field (see "Affiliate links" below). Paste tracking links when accounts exist.
 
@@ -24,21 +32,17 @@ literal placeholder is flagged here.
 - `app/components/organisms/OLiveActivityFeed.vue` now fetches **real** CoinGecko data via
   `server/api/market/activity.get.ts` (significant movers only). No simulated events.
 
-### Case-study metrics — fabricated numbers
-- `i18n/locales/*.json` → `caseStudy` namespace: `metric1Value: "+340%"`,
-  `metric2Value: "14 days"`, `metric3Value: "10,000+"` and `resultItem1/2/3` claims.
-- These are invented. Replace with real, verifiable results or remove the section.
-
-### Success story — fabricated testimonial
-- `i18n/locales/*.json` → `successStory`: "Earning $5,000/month online",
-  "Built multiple income streams", "Financial freedom…". No named, real person behind it.
-- Replace with a real, attributed story or remove.
-
-### Founder story — literal placeholder + invented narrative
-- `i18n/locales/*.json` → `founder.name`: **"Founder Name"** (literal placeholder), plus an
-  invented `quote`/`story1`/`story2` and `imageAlt`. `OFounderStory.vue` renders an empty
-  `AAvatar` (no real portrait).
-- Fill in the real founder name/story + a real portrait, or remove the section.
+### ✅ RESOLVED — Fabricated social-proof sections removed from the homepage
+- `OCaseStudy.vue`, `OSuccessStory.vue`, and `OFounderStory.vue` are **no longer rendered**
+  on `app/pages/index.vue` (their metrics / testimonials / founder story were invented). The
+  component files are **kept on disk**, and the `caseStudy` / `successStory` / `founder` i18n
+  namespaces remain — reintroduce ONLY with real, verifiable data:
+  - `caseStudy`: `metric1Value: "+340%"`, `metric2Value: "14 days"`, `metric3Value: "10,000+"`
+    and the `resultItem1/2/3` claims are invented.
+  - `successStory`: "Earning $5,000/month online", "Built multiple income streams", etc. —
+    needs a real, attributed person.
+  - `founder`: `name` is still the literal **"Founder Name"** placeholder, plus an invented
+    `quote` / `story1` / `story2` and an empty `AAvatar` (no real portrait).
 
 ### Social proof — unverified "thousands"
 - `i18n/locales/*.json` → `hero.socialProof`: "Join thousands already growing their income".
@@ -64,6 +68,20 @@ literal placeholder is flagged here.
 - `OAdminPanel.vue` `getThumbnailUrl()` shells out to `https://placehold.co/...` for missing
   thumbnails. Replace with local/self-hosted placeholders (external dependency + potential CSP).
 
+### Auth rate-limiting / account-lockout — client-side only (needs real infra)
+- A simple lockout / throttle was added to `app/stores/auth.ts`: 5 failed logins → a 15-minute
+  per-email lock; password-reset requests throttled (1/min, 5/hr) and signup attempts
+  throttled (10/hr). This is "consistent with the existing localStorage auth" but it is
+  **fundamentally bypassable** — anyone can clear localStorage or open a private window.
+  Real protection needs a server: per-IP + per-account rate limiting and a persisted,
+  server-side lockout (e.g. Supabase Auth / Neon Auth, or a DB-backed counter).
+
+### Admin authentication is a mock
+- `app/pages/admin.vue` "login" accepts **any non-empty password** and just sets a
+  `localStorage['admin-auth']` flag — no real credential check — and the admin CRUD
+  (`app/stores/resources.ts`) is localStorage-only. Replace with a real server-side admin
+  auth + DB before exposing `/admin` publicly.
+
 ## Affiliate links — pending (owner does not have links yet)
 - The 6 resources in `app/stores/resources.ts` have `url` = **official** signup URL (no
   tracking) and `trackingUrl` = `''` (empty). When affiliate accounts are set up, paste the
@@ -76,6 +94,14 @@ literal placeholder is flagged here.
   6. Depop (sell/resell) — `https://www.depop.com`
 - Resources are admin-editable (`/admin` → CRUD in the resources store), so links can be
   added via the UI without a code deploy. **Never invent affiliate IDs or earnings claims.**
+
+## Static-host feed caveat
+- On the **static Netlify deploy** (SSG), the `/api/market/activity` server route does **not**
+  run, so `OLiveActivityFeed.vue` hides itself entirely (no "unavailable" box). The
+  server-side TTL cache + per-IP rate limit in `server/api/market/activity.get.ts` only apply
+  when the route actually executes (an SSR-capable runtime / Netlify Function). The live feed
+  therefore only shows on SSR deployments; the static build's collapsed "show more" group
+  simply contains no live-feed section.
 
 ## Removed (2026-11-06): gamification that returned no real value
 - Daily check-in (`ODailyCheckIn`), achievements/badges (`OAchievementBadge`,

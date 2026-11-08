@@ -42,9 +42,12 @@ function handleLogin() {
   const result = auth.login(email.value.trim(), password.value)
   isSubmitting.value = false
 
-  if (result) {
+  if (result.ok) {
     const redirect = (route.query.redirect as string) || localePath('/')
     router.push(redirect)
+  } else if (result.reason === 'locked') {
+    const mins = Math.max(1, Math.ceil((result.lockedUntil - Date.now()) / 60000))
+    error.value = `Too many failed attempts. Account locked. Try again in ${mins} minute${mins === 1 ? '' : 's'}.`
   } else {
     error.value = 'Invalid email or password'
   }

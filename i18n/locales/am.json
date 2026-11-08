@@ -40,7 +40,8 @@
     "empty": "በአሁኑ ጊዜ ጉልህ የገበያ እንቅስቃሴ የለም።",
     "unavailable": "የቀጥታ የገበያ መረጃ በአሁኑ ጊዜ አይገኝም። በቅርቡ ይመለሱ።",
     "stale": "መረጃው ሊዘገይ ይችላል።",
-    "change24h": "24ሰ"
+    "change24h": "24ሰ",
+    "live": "በቀጥታ"
   },
   "admin": {
     "title": "የአስተዳደር ፓነል",
@@ -67,6 +68,12 @@
     "noResourcesTitle": "ምንም መረጃ አይገኝም",
     "noResourcesDescription": "ለተመረጡ ገንዘብ ማግኛ መረጃዎች በቅርቡ ይመለሱ።",
     "emptyCategory": "የ{category} መረጃዎች ገና የሉም።",
+    "saveBookmark": "መረጃ አስቀምጥ",
+    "removeBookmark": "ምልክት አስወግድ",
+    "savedOnly": "የተቀመጡ ብቻ",
+    "showAll": "ሁሉንም አሳይ",
+    "noSavedTitle": "እስካሁን የተቀመጡ መረጃዎች የሉም",
+    "noSavedDescription": "በኋላ በፍጥነት ለማግኘት መረጃዎችን ምልክት ያድርጉ።",
     "categories": {
       "general": "አጠቃላይ"
     },
@@ -219,7 +226,8 @@
     "fileTooLarge": "ፋይል ከ2MB በታች መሆን አለበት"
   },
   "home": {
-    "title": "Money Conversion SPA"
+    "title": "Money Conversion SPA",
+    "showMore": "ተጨማሪ መሳሪያዎችን እና መረጃዎችን ያስሱ"
   },
   "primaryCta": "ይጀምሩ",
   "secondaryCta": "ተጨማሪ ይወቁ",
