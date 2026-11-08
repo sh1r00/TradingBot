@@ -82,18 +82,32 @@ literal placeholder is flagged here.
   (`app/stores/resources.ts`) is localStorage-only. Replace with a real server-side admin
   auth + DB before exposing `/admin` publicly.
 
-## Affiliate links — pending (owner does not have links yet)
-- The 6 resources in `app/stores/resources.ts` have `url` = **official** signup URL (no
-  tracking) and `trackingUrl` = `''` (empty). When affiliate accounts are set up, paste the
-  tracking links into `trackingUrl`:
-  1. Scrambly (gaming) — `https://scrambly.io`
-  2. Webull (investing) — `https://www.webull.com`
-  3. Mercor (AI work) — `https://mercor.com`
-  4. Upwork & Fiverr (freelancing) — `https://www.upwork.com`
-  5. Amazon Associates (affiliate marketing) — `https://affiliate-program.amazon.com`
-  6. Depop (sell/resell) — `https://www.depop.com`
-- Resources are admin-editable (`/admin` → CRUD in the resources store), so links can be
-  added via the UI without a code deploy. **Never invent affiliate IDs or earnings claims.**
+## Affiliate links — pending (owner has NOT provided URLs yet)
+
+The 4 **main** money-makers the owner wants wired to affiliate links are Scrambly,
+Webull, Mercor, and Depop (plus Upwork & Fiverr and Amazon Associates). Each seeded
+resource in `app/stores/resources.ts` has `url` = **official** (non-tracking) URL and
+`trackingUrl` = `''` (empty).
+
+**⚠️ AFFILIATE LINK URLS — PASTE HERE (owner to supply):**
+1. Scrambly (gaming) — affiliate URL: `___________`
+2. Webull (investing) — affiliate URL: `___________`
+3. Mercor (AI work) — affiliate URL: `___________`
+4. Depop (reselling) — affiliate URL: `___________`
+5. Upwork & Fiverr (freelancing) — affiliate URL: `___________`
+6. Amazon Associates (affiliate marketing) — affiliate URL: `___________`
+
+Once supplied, set each resource's `trackingUrl` (and/or swap `url`) so every card and
+blog CTA points at the affiliate link. Blog content is already expanded (en/es/am).
+Resources are admin-editable (`/admin` → CRUD in the resources store), so links can also
+be added via the UI without a code deploy. **Never invent affiliate IDs or earnings claims.**
+Current official (non-tracking) URLs for reference:
+  1. Scrambly — `https://scrambly.io`
+  2. Webull — `https://www.webull.com`
+  3. Mercor — `https://mercor.com`
+  4. Depop — `https://www.depop.com`
+  5. Upwork & Fiverr — `https://www.upwork.com`
+  6. Amazon Associates — `https://affiliate-program.amazon.com`
 
 ## Static-host feed caveat
 - On the **static Netlify deploy** (SSG), the `/api/market/activity` server route does **not**
