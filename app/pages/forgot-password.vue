@@ -16,7 +16,7 @@ const error = ref('')
 const sent = ref(false)
 const isSubmitting = ref(false)
 
-function handleForgotPassword() {
+async function handleForgotPassword() {
   error.value = ''
 
   if (!email.value.trim()) {
@@ -25,15 +25,15 @@ function handleForgotPassword() {
   }
 
   isSubmitting.value = true
-  const result = auth.requestPasswordReset(email.value.trim())
+  const result = await auth.requestPasswordReset(email.value.trim())
   isSubmitting.value = false
 
   if (result.ok) {
     sent.value = true
-  } else if (result.reason === 'throttled') {
-    error.value = 'Too many reset requests. Please wait before trying again.'
+  } else if (result.reason === 'not-configured') {
+    error.value = 'Password reset is not configured yet. Set the Supabase keys to enable it.'
   } else {
-    error.value = 'No account found with that email address'
+    error.value = 'Could not send a reset link. Please try again.'
   }
 }
 </script>

@@ -9,32 +9,27 @@ useSeoMeta({
 })
 
 const auth = useAuthStore()
-const route = useRoute()
 const router = useRouter()
 const localePath = useLocalePath()
 
-const token = ref((route.query.token as string) || '')
 const newPassword = ref('')
 const confirmPassword = ref('')
 const error = ref('')
 const success = ref(false)
 const isSubmitting = ref(false)
-const isValidToken = ref(true)
+const isValidSession = ref(false)
+const checking = ref(true)
 
-// Check token validity on mount
-onMounted(() => {
-  if (!token.value.trim()) {
-    isValidToken.value = false
-  }
+// Supabase emails a recovery link. On this page the recovery session is
+// established from the tokens in the URL — `initialize()` picks it up.
+onMounted(async () => {
+  await auth.initialize()
+  isValidSession.value = auth.isAuthenticated
+  checking.value = false
 })
 
-function handleReset() {
+async function handleReset() {
   error.value = ''
-
-  if (!token.value.trim()) {
-    isValidToken.value = false
-    return
-  }
 
   if (!newPassword.value.trim()) {
     error.value = 'Please enter a new password'
@@ -50,13 +45,13 @@ function handleReset() {
   }
 
   isSubmitting.value = true
-  const result = auth.resetPassword(token.value.trim(), newPassword.value)
+  const ok = await auth.resetPassword(newPassword.value)
   isSubmitting.value = false
 
-  if (result) {
+  if (ok) {
     success.value = true
   } else {
-    error.value = 'Invalid or expired reset link. Please request a new one.'
+    error.value = 'Could not reset your password. Please request a new link.'
   }
 }
 </script>
@@ -64,13 +59,22 @@ function handleReset() {
 <template>
   <div class="min-h-[80vh] flex items-center justify-center px-4">
     <div class="max-w-md w-full bg-surface rounded-2xl p-8 shadow-lg border border-outline-variant">
-      <!-- Invalid token -->
-      <template v-if="!isValidToken">
+      <!-- Checking recovery session -->
+      <p
+        v-if="checking"
+        class="text-on-surface-variant text-center py-8"
+        aria-live="polite"
+      >
+        Loading…
+      </p>
+
+      <!-- Invalid / missing session -->
+      <template v-else-if="!isValidSession">
         <h1 class="text-2xl font-bold text-on-surface mb-2 text-center">
           Invalid Link
         </h1>
         <p class="text-on-surface-variant text-center mb-6">
-          This password reset link is invalid or missing. Please request a new one.
+          This password reset link is invalid or has expired. Please request a new one.
         </p>
         <NuxtLink
           :to="localePath('/forgot-password')"

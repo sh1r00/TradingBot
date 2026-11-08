@@ -1,90 +1,63 @@
 <script setup lang="ts">
-const isAuthenticated = ref(false)
-const password = ref('')
-const loginError = ref('')
+import { useAuthStore } from '~/stores/auth'
 
-onMounted(() => {
-  if (localStorage.getItem('admin-auth')) {
-    isAuthenticated.value = true
-  }
+definePageMeta({ layout: 'default' })
+
+const auth = useAuthStore()
+const localePath = useLocalePath()
+const config = useRuntimeConfig()
+const adminEmails = (config.public.adminEmails as string[]) || []
+
+const isAdmin = computed(() => {
+  const email = (auth.currentUser?.email || '').toLowerCase()
+  return !!email && adminEmails.includes(email)
 })
 
-function handleLogin() {
-  loginError.value = ''
-  if (password.value.trim()) {
-    localStorage.setItem('admin-auth', 'true')
-    isAuthenticated.value = true
-  } else {
-    loginError.value = 'Password is required'
-  }
-}
+onMounted(() => {
+  auth.initialize()
+})
 
-function handleLogout() {
-  localStorage.removeItem('admin-auth')
-  isAuthenticated.value = false
-  password.value = ''
+async function handleLogout() {
+  await auth.logout()
 }
 </script>
 
 <template>
   <div class="max-w-7xl mx-auto px-4 py-8">
-    <template v-if="isAuthenticated">
+    <!-- Auth not configured -->
+    <div v-if="!auth.isConfigured" class="max-w-md mx-auto text-center py-12">
+      <h1 class="text-2xl font-bold text-on-surface mb-3">Admin not configured</h1>
+      <p class="text-on-surface-variant">
+        Set <code>NUXT_PUBLIC_SUPABASE_URL</code> and
+        <code>NUXT_PUBLIC_SUPABASE_ANON_KEY</code> (plus
+        <code>NUXT_PUBLIC_ADMIN_EMAILS</code>) to enable the admin panel.
+      </p>
+    </div>
+
+    <!-- Signed out -->
+    <div v-else-if="!auth.isAuthenticated" class="max-w-md mx-auto text-center py-12">
+      <h1 class="text-2xl font-bold text-on-surface mb-3">Sign in to continue</h1>
+      <p class="text-on-surface-variant mb-6">You must be signed in to manage resources.</p>
+      <NuxtLink
+        :to="localePath('/login?redirect=/admin')"
+        class="inline-flex items-center justify-center min-h-11 px-6 py-3 rounded-full bg-primary text-on-primary font-medium hover:bg-primary/90"
+      >
+        Sign In
+      </NuxtLink>
+    </div>
+
+    <!-- Signed in but not an admin -->
+    <div v-else-if="!isAdmin" class="max-w-md mx-auto text-center py-12">
+      <h1 class="text-2xl font-bold text-on-surface mb-3">Access denied</h1>
+      <p class="text-on-surface-variant">Your account does not have admin access.</p>
+    </div>
+
+    <!-- Admin panel -->
+    <div v-else>
       <div class="flex justify-end mb-4">
-        <AButton
-          variant="outline"
-          aria-label="Log out of admin panel"
-          @click="handleLogout"
-        >
-          Logout
-        </AButton>
+        <AButton variant="outline" @click="handleLogout">Logout</AButton>
       </div>
       <OAdminPanel />
-    </template>
-
-    <template v-else>
-      <div class="max-w-md mx-auto mt-16">
-        <h1 class="text-2xl font-bold text-on-surface mb-6 text-center">
-          Admin Login
-        </h1>
-        <form
-          class="space-y-4"
-          @submit.prevent="handleLogin"
-        >
-          <div>
-            <label
-              for="admin-password"
-              class="block text-sm font-medium text-on-surface mb-1"
-            >
-              Password
-            </label>
-            <input
-              id="admin-password"
-              v-model="password"
-              type="password"
-              class="w-full px-4 py-3 rounded-lg border border-outline bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
-              :aria-invalid="loginError ? 'true' : undefined"
-              :aria-errormessage="loginError ? 'login-error' : undefined"
-              autocomplete="current-password"
-            />
-            <p
-              v-if="loginError"
-              id="login-error"
-              class="text-error text-sm mt-1"
-              role="alert"
-              aria-live="assertive"
-            >
-              {{ loginError }}
-            </p>
-          </div>
-          <AButton
-            type="submit"
-            variant="filled"
-            class="w-full"
-          >
-            Sign In
-          </AButton>
-        </form>
-      </div>
-    </template>
+    </div>
   </div>
 </template>

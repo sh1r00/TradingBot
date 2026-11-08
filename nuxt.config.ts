@@ -40,6 +40,16 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl: BASE_URL,
+      // Supabase Auth — real auth replacing the old localStorage shim. Empty
+      // until the owner creates a Supabase project; auth is disabled then.
+      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
+      supabaseAnonKey: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || '',
+      // Comma-separated email allowlist for the /admin panel (which Supabase
+      // users may access admin). UI-level gate; real enforcement is Supabase Auth.
+      adminEmails: (process.env.NUXT_PUBLIC_ADMIN_EMAILS || '')
+        .split(',')
+        .map((s) => s.trim().toLowerCase())
+        .filter(Boolean),
       // Affiliate / tracking URLs — empty by default, fall back to the
       // official non-tracking `url` in the resources store. Set these env
       // vars (and rebuild) to switch every outward link to the affiliate URL.

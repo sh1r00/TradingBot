@@ -25,6 +25,15 @@ literal placeholder is flagged here.
   `NUXT_PUBLIC_AFFILIATE_<KEY>` env var and falls back to the official URL. Awaiting the
   owner's tracking URLs (see "Affiliate links" below).
 
+- **Supabase Auth (real auth)** — the mock admin login and the localStorage user-auth shim
+  are replaced with Supabase Auth (`@supabase/supabase-js`). Until keys are set, `/login`,
+  `/signup`, password reset and `/admin` show an honest "not configured" state. Needs a
+  **Supabase project** (keys in `.env.example`):
+  - `NUXT_PUBLIC_SUPABASE_URL`
+  - `NUXT_PUBLIC_SUPABASE_ANON_KEY`
+  - `NUXT_PUBLIC_ADMIN_EMAILS` (comma-separated admin emails)
+  Optional hardening: enforce the admin role server-side (RLS / `profiles.is_admin`).
+
 ## Spoofed / placeholder data (do NOT go live with these)
 
 ### ✅ RESOLVED — Live activity feed (was 100% fabricated)
@@ -69,19 +78,18 @@ literal placeholder is flagged here.
 - `OAdminPanel.vue` `getThumbnailUrl()` shells out to `https://placehold.co/...` for missing
   thumbnails. Replace with local/self-hosted placeholders (external dependency + potential CSP).
 
-### Auth rate-limiting / account-lockout — client-side only (needs real infra)
-- A simple lockout / throttle was added to `app/stores/auth.ts`: 5 failed logins → a 15-minute
-  per-email lock; password-reset requests throttled (1/min, 5/hr) and signup attempts
-  throttled (10/hr). This is "consistent with the existing localStorage auth" but it is
-  **fundamentally bypassable** — anyone can clear localStorage or open a private window.
-  Real protection needs a server: per-IP + per-account rate limiting and a persisted,
-  server-side lockout (e.g. Supabase Auth / Neon Auth, or a DB-backed counter).
+### ✅ RESOLVED — Auth moved to Supabase Auth (was localStorage, bypassable)
+- The localStorage auth shim in `app/stores/auth.ts` (plaintext passwords + client-side
+  lockout/throttle) is **gone**. It's now a thin wrapper over Supabase Auth
+  (`signUp` / `signInWithPassword` / `resetPasswordForEmail` / `updateUser`), so credential
+  checks and rate limiting happen server-side. `isConfigured` is false until the Supabase
+  keys are set, and every auth method returns `reason: 'not-configured'`.
 
-### Admin authentication is a mock
-- `app/pages/admin.vue` "login" accepts **any non-empty password** and just sets a
-  `localStorage['admin-auth']` flag — no real credential check — and the admin CRUD
-  (`app/stores/resources.ts`) is localStorage-only. Replace with a real server-side admin
-  auth + DB before exposing `/admin` publicly.
+### ✅ RESOLVED — Admin uses real Supabase auth + email allowlist
+- `app/pages/admin.vue` no longer accepts "any non-empty password". It now requires a real
+  Supabase session whose email is in `NUXT_PUBLIC_ADMIN_EMAILS`. Note: the allowlist is a
+  UI-level gate; the resource CRUD is still localStorage-only (a DB for persistence is a
+  separate item — see the live-data-backend work below).
 
 ## Affiliate links — wired via env, awaiting the owner's URLs
 

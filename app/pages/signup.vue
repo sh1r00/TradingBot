@@ -19,7 +19,7 @@ const confirmPassword = ref('')
 const error = ref('')
 const isSubmitting = ref(false)
 
-function handleSignup() {
+async function handleSignup() {
   error.value = ''
 
   if (!name.value.trim()) {
@@ -44,16 +44,17 @@ function handleSignup() {
   }
 
   isSubmitting.value = true
-  const result = auth.signup(email.value.trim(), password.value, name.value.trim())
+  const result = await auth.signup(email.value.trim(), password.value, name.value.trim())
   isSubmitting.value = false
 
   if (result.ok) {
-    // Auto-login successful, redirect to home
     router.push(localePath('/'))
-  } else if (result.reason === 'throttled') {
-    error.value = 'Too many sign-up attempts. Please wait a while and try again.'
-  } else {
+  } else if (result.reason === 'email-exists') {
     error.value = 'An account with this email already exists'
+  } else if (result.reason === 'not-configured') {
+    error.value = 'Sign-up is not configured yet. Set the Supabase keys to enable it.'
+  } else {
+    error.value = 'Could not create your account. Please try again.'
   }
 }
 </script>
