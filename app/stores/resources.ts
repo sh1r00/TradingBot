@@ -107,6 +107,42 @@ function seedResources(): ResourceLink[] {
 }
 
 /**
+ * Merge a previously-persisted list with the current seed so that seed-side
+ * changes (new resources, refreshed URLs, publish toggles) reach returning
+ * users whose localStorage would otherwise shadow them. Seeded resources are
+ * matched by `key` and refreshed from the seed; admin-created links (no `key`)
+ * are preserved as-is, and any new seed resources are appended.
+ */
+function mergeSeeds(stored: ResourceLink[], seeds: ResourceLink[]): ResourceLink[] {
+  const seedByKey = new Map(seeds.filter((s) => s.key).map((s) => [s.key, s]))
+  const seenKeys = new Set<string>()
+
+  const merged = stored.map((link) => {
+    if (link.key && seedByKey.has(link.key)) {
+      const seed = seedByKey.get(link.key)!
+      seenKeys.add(link.key)
+      return {
+        ...link,
+        category: seed.category,
+        url: seed.url,
+        trackingUrl: seed.trackingUrl,
+        thumbnail: seed.thumbnail,
+        isPublished: seed.isPublished,
+      }
+    }
+    return link
+  })
+
+  for (const seed of seeds) {
+    if (seed.key && !seenKeys.has(seed.key)) {
+      merged.push(seed)
+    }
+  }
+
+  return merged
+}
+
+/**
  * Resource links store.
  * Manages CRUD operations for resource links persisted in localStorage.
  *
@@ -134,11 +170,14 @@ export const useResourcesStore = defineStore('resources', () => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY)
       if (stored) {
-        links.value = JSON.parse(stored)
+        // Merge stored links with the current seed so seed-side changes
+        // (new resources, refreshed URLs, publish toggles) reach returning
+        // users whose localStorage would otherwise shadow them.
+        links.value = mergeSeeds(JSON.parse(stored), seedResources())
       } else {
         links.value = seedResources()
-        persist()
       }
+      persist()
       updateCategories()
     } catch (e) {
       error.value = 'Failed to load resources'

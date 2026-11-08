@@ -1,6 +1,9 @@
 import tailwindcss from '@tailwindcss/vite'
 import { defineNuxtConfig } from 'nuxt/config'
 
+// Canonical public base URL. Override via NUXT_PUBLIC_BASE_URL for a custom domain.
+const BASE_URL = process.env.NUXT_PUBLIC_BASE_URL || 'https://trading-bot-dxt.pages.dev'
+
 export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
@@ -36,7 +39,18 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+      baseUrl: BASE_URL,
+      // Affiliate / tracking URLs — empty by default, fall back to the
+      // official non-tracking `url` in the resources store. Set these env
+      // vars (and rebuild) to switch every outward link to the affiliate URL.
+      affiliates: {
+        scrambly: process.env.NUXT_PUBLIC_AFFILIATE_SCRAMBLY || '',
+        webull: process.env.NUXT_PUBLIC_AFFILIATE_WEBULL || '',
+        mercor: process.env.NUXT_PUBLIC_AFFILIATE_MERCOR || '',
+        'upwork-fiverr': process.env.NUXT_PUBLIC_AFFILIATE_UPWORK_FIVERR || '',
+        'amazon-associates': process.env.NUXT_PUBLIC_AFFILIATE_AMAZON_ASSOCIATES || '',
+        depop: process.env.NUXT_PUBLIC_AFFILIATE_DEPOP || '',
+      },
     },
   },
 
@@ -64,7 +78,7 @@ export default defineNuxtConfig({
       },
     ],
     lazy: true,
-    baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+    baseUrl: BASE_URL,
   },
 
   pwa: {
@@ -152,7 +166,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+    url: BASE_URL,
     name: 'Money Conversion SPA',
     description: 'Discover curated, vetted money-making resources and tools. Free calculators, checklists, and expert-selected opportunities.',
     defaultLocale: 'en',
@@ -202,4 +216,3 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   nitro: { prerender: { failOnError: false } },
 })
-

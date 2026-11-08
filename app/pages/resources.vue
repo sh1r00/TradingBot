@@ -13,5 +13,6 @@ useSeoMeta({
 <template>
   <div>
     <OResourceGrid />
+    <OResourceGuides />
   </div>
 </template>

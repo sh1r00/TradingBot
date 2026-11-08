@@ -74,6 +74,12 @@
     "showAll": "Show all",
     "noSavedTitle": "No saved resources yet",
     "noSavedDescription": "Bookmark resources to find them quickly here later.",
+    "guidesTitle": "In-depth guides",
+    "guidesSubtitle": "How each money-maker works, how to start, and what to realistically expect.",
+    "howItWorks": "How it works",
+    "howToStart": "How to start",
+    "expectations": "What to expect",
+    "visitSite": "Visit {title}",
     "categories": {
       "general": "General"
     },

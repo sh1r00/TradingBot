@@ -1,0 +1,7 @@
+# Locale redirects (read by Cloudflare Pages and Netlify).
+# English is the default locale (i18n `prefix_except_default`), so the prefixed
+# `/en` routes are not generated and would 404. Redirect them to the canonical
+# unprefixed form.
+/en        /        301
+/en/       /        301
+/en/*      /:splat  301

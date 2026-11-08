@@ -74,6 +74,12 @@
     "showAll": "ሁሉንም አሳይ",
     "noSavedTitle": "እስካሁን የተቀመጡ መረጃዎች የሉም",
     "noSavedDescription": "በኋላ በፍጥነት ለማግኘት መረጃዎችን ምልክት ያድርጉ።",
+    "guidesTitle": "ዝርዝር መመሪያዎች",
+    "guidesSubtitle": "እያንዳንዱ ገንዘብ ማግኛ እንዴት እንደሚሠራ፣ እንዴት እንደሚጀመር እና በእውነት ምን እንደሚጠበቅ።",
+    "howItWorks": "እንዴት እንደሚሠራ",
+    "howToStart": "እንዴት መጀመር",
+    "expectations": "ምን መጠበቅ",
+    "visitSite": "{title} ይጎብኙ",
     "categories": {
       "general": "አጠቃላይ"
     },

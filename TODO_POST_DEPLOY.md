@@ -21,8 +21,9 @@ literal placeholder is flagged here.
   trigger the free-toolkit drip. Needs: a **Brevo API key + contact-list ID**. Until then,
   these forms silently discard every submission.
 
-- **Affiliate links** — the 6 resources use official (non-tracking) URLs with an empty
-  `trackingUrl` field (see "Affiliate links" below). Paste tracking links when accounts exist.
+- **Affiliate links** — fully wired via `useAffiliateLinks().hrefFor()`; each link prefers a
+  `NUXT_PUBLIC_AFFILIATE_<KEY>` env var and falls back to the official URL. Awaiting the
+  owner's tracking URLs (see "Affiliate links" below).
 
 ## Spoofed / placeholder data (do NOT go live with these)
 
@@ -82,26 +83,26 @@ literal placeholder is flagged here.
   (`app/stores/resources.ts`) is localStorage-only. Replace with a real server-side admin
   auth + DB before exposing `/admin` publicly.
 
-## Affiliate links — pending (owner has NOT provided URLs yet)
+## Affiliate links — wired via env, awaiting the owner's URLs
 
-The 4 **main** money-makers the owner wants wired to affiliate links are Scrambly,
-Webull, Mercor, and Depop (plus Upwork & Fiverr and Amazon Associates). Each seeded
-resource in `app/stores/resources.ts` has `url` = **official** (non-tracking) URL and
-`trackingUrl` = `''` (empty).
+Affiliate/tracking links are now fully wired: every outward link (resource card, leaderboard
+row, and the in-depth guide CTA) resolves through `useAffiliateLinks().hrefFor()`, which
+prefers an env-supplied tracking URL and falls back to the official non-tracking URL.
+
+**How to switch links on (no code change needed):**
+1. Paste each affiliate URL into `.env` (see `.env.example` for the key names).
+2. Set the same vars on Cloudflare Pages (project `trading-bot`).
+3. Rebuild + redeploy. Empty/absent vars fall back to the official URL.
 
 **⚠️ AFFILIATE LINK URLS — PASTE HERE (owner to supply):**
-1. Scrambly (gaming) — affiliate URL: `___________`
-2. Webull (investing) — affiliate URL: `___________`
-3. Mercor (AI work) — affiliate URL: `___________`
-4. Depop (reselling) — affiliate URL: `___________`
-5. Upwork & Fiverr (freelancing) — affiliate URL: `___________`
-6. Amazon Associates (affiliate marketing) — affiliate URL: `___________`
+1. Scrambly (gaming) — `NUXT_PUBLIC_AFFILIATE_SCRAMBLY=___________`
+2. Webull (investing) — `NUXT_PUBLIC_AFFILIATE_WEBULL=___________`
+3. Mercor (AI work) — `NUXT_PUBLIC_AFFILIATE_MERCOR=___________`
+4. Depop (reselling) — `NUXT_PUBLIC_AFFILIATE_DEPOP=___________`
+5. Upwork & Fiverr (freelancing) — `NUXT_PUBLIC_AFFILIATE_UPWORK_FIVERR=___________`
+6. Amazon Associates (affiliate marketing) — `NUXT_PUBLIC_AFFILIATE_AMAZON_ASSOCIATES=___________`
 
-Once supplied, set each resource's `trackingUrl` (and/or swap `url`) so every card and
-blog CTA points at the affiliate link. Blog content is already expanded (en/es/am).
-Resources are admin-editable (`/admin` → CRUD in the resources store), so links can also
-be added via the UI without a code deploy. **Never invent affiliate IDs or earnings claims.**
-Current official (non-tracking) URLs for reference:
+**Never invent affiliate IDs or earnings claims.** Current official (non-tracking) URLs for reference:
   1. Scrambly — `https://scrambly.io`
   2. Webull — `https://www.webull.com`
   3. Mercor — `https://mercor.com`

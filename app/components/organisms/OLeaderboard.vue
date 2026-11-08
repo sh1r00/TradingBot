@@ -2,9 +2,11 @@
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useResourcesStore, type ResourceLink } from '~/stores/resources'
+import { useAffiliateLinks } from '~/composables/useAffiliateLinks'
 
 const { t } = useI18n()
 const resourcesStore = useResourcesStore()
+const { hrefFor } = useAffiliateLinks()
 
 /**
  * Resolve a resource's display text. Seeded resources (`key`) render from i18n;
@@ -116,7 +118,7 @@ onMounted(() => {
           :key="resource.id"
         >
           <a
-            :href="resource.url"
+            :href="hrefFor(resource)"
             target="_blank"
             rel="noopener noreferrer"
             :aria-label="`${displayTitle(resource)} - ${t('common.openInNewTab', { resource: displayTitle(resource) })}`"

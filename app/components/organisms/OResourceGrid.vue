@@ -3,10 +3,12 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useResourcesStore, type ResourceLink } from '~/stores/resources'
 import { useBookmarksStore } from '~/stores/bookmarks'
+import { useAffiliateLinks } from '~/composables/useAffiliateLinks'
 
 const { t } = useI18n()
 const resourcesStore = useResourcesStore()
 const bookmarksStore = useBookmarksStore()
+const { hrefFor } = useAffiliateLinks()
 
 const showSavedOnly = ref(false)
 
@@ -221,7 +223,7 @@ onMounted(() => {
                 :title="displayTitle(link)"
                 :description="displayDescription(link)"
                 :category="category"
-                :url="link.url"
+                :url="hrefFor(link)"
                 :thumbnail="link.thumbnail || ''"
               />
             </li>

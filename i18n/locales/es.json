@@ -74,6 +74,12 @@
     "showAll": "Mostrar todos",
     "noSavedTitle": "Aún no hay recursos guardados",
     "noSavedDescription": "Marca recursos para encontrarlos rápido aquí después.",
+    "guidesTitle": "Guías detalladas",
+    "guidesSubtitle": "Cómo funciona cada forma de ganar dinero, cómo empezar y qué esperar de forma realista.",
+    "howItWorks": "Cómo funciona",
+    "howToStart": "Cómo empezar",
+    "expectations": "Qué esperar",
+    "visitSite": "Visitar {title}",
     "categories": {
       "general": "General"
     },

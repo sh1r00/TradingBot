@@ -80,11 +80,12 @@ not on this code.)
   helper functions that fall back to literal text for admin-created links (which store
   free-form strings).
 - **Blog guides:** each resource has a 3-paragraph guide under `resources.items.<key>.blog*`
-  (`blogHowItWorks`, `blogHowToStart`, `blogExpectations`) — translated in en/es/am. They are
-  authored and locked in i18n, ready to render in a detail view when desired.
-- **Affiliate links:** each seed has a working `url` (official, non-tracking) and a
-  `trackingUrl` field that is **intentionally empty**. Affiliate tracking IDs are PENDING —
-  the owner must paste them. No affiliate IDs or earnings claims were invented.
+  (`blogHowItWorks`, `blogHowToStart`, `blogExpectations`) — translated in en/es/am. Rendered
+  in `OResourceGuides.vue` on the `/resources` page (expandable per-resource guides + a
+  "visit" CTA).
+- **Affiliate links:** every outward link resolves through `useAffiliateLinks().hrefFor()`,
+  preferring a `NUXT_PUBLIC_AFFILIATE_<KEY>` env var and falling back to the official
+  non-tracking `url`. No affiliate IDs or earnings claims were invented.
 - **Admin:** resources are CRUD-editable at `/admin` and persisted to `localStorage`.
 
 ---
